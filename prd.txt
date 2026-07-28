@@ -1,0 +1,1289 @@
+
+
+PRODUCT REQUIREMENTS DOCUMENT
+Water Supplier Marketplace
+One Customer + Supplier Mobile App and Laravel Admin Portal
+
+Prepared for: Muqaddam Sheikh
+Document version: 1.0
+Prepared on: 18 July 2026
+Primary market: Karachi / Pakistan (assumption)
+Technology: React Native mobile app + Laravel backend and web portal
+Product model: Multi-supplier marketplace; customers discover shops within an admin-configurable radius (default 5 km)
+
+Core recommendation: Build one role-based React Native app for Customer and Supplier. Keep the Admin/Operations experience as a separate secure Laravel web portal. Start with supplier-managed delivery and COD; add integrated payments, subscriptions and rider automation after the pilot proves order volume.
+ | 
+
+Confidential working specification • suitable for product, design, development and pilot planning
+
+Document Control
+Item
+ | Definition
+ | Purpose
+ | Define the complete product, business and technical scope for a local water-delivery marketplace.
+ | Intended readers
+ | Founder/product owner, React Native developer, Laravel developer, UI/UX designer, QA, operations and supplier partners.
+ | Scope status
+ | Recommended baseline. Commercial rules, service radius, commission, cancellation windows and compliance documents must be confirmed before development.
+ | Design preset
+ | Compact reference guide: dense but readable, with fixed-width tables and a consistent blue business style.
+ | Change control
+ | Any change affecting pricing, empty-container liability, payment settlement, supplier payout or order status requires product and backend review.
+ | 
+Simple Roman Urdu Summary
+Yeh app aik marketplace hogi jahan customer apne qareeb approved water shops dekh kar order karega aur supplier isi app ke supplier mode se apni shop, products, orders aur delivery manage karega. Company ki team separate web admin portal se suppliers verify, disputes handle aur commission/settlement manage karegi.
+Customer ko milega: nearby shops, rates, bottle sizes, cart, empty-bottle exchange/deposit, order tracking, repeat order, scheduled/recurring delivery, reviews aur support.
+Supplier ko milega: registration/verification, shop profile, 5 km service area, timings, products/stock, order accept/reject, delivery status, bottle ledger, earnings, payouts, staff aur reports.
+Admin ko milega: supplier approval, water-quality documents, orders, complaints, commissions, payments, promotions, city/area settings, reports aur audit logs.
+MVP rule: ek order sirf ek shop se hoga; COD se start karein; supplier khud delivery manage kare; customer delivery OTP se order close kare.
+Sab se critical logic: 19L/large jars ki empty bottle return, deposit charge aur supplier-wise bottle ledger backend par correctly maintain hona chahiye.
+Scope boundary: The app connects customers with private water suppliers. It is not a municipal utility billing system and it does not itself certify water safety. The platform verifies supplier evidence and must show certification dates transparently.
+ | 
+Contents
+1. Executive Summary and Product Decisions
+2. Users, Roles and Product Components
+3. Business Model and Marketplace Rules
+4. Supplier Registration and Verification
+5. Functional Modules
+6. End-to-End Workflows
+7. Empty Bottle / Jar Deposit System
+8. Order, Pricing, Payment and Settlement Rules
+9. Screen Inventory and Notifications
+10. Technical Architecture
+11. Data Model
+12. API Scope
+13. Security, Privacy and Compliance
+14. Non-Functional Requirements
+15. Analytics and Reporting
+16. Testing and Quality Assurance
+17. DevOps, Environments and Operations
+18. MVP Roadmap and Estimate
+19. Acceptance Criteria
+20. Risks, Launch Plan and Open Decisions
+Appendix A. Research Basis and Sources
+Appendix B. Glossary
+
+1. Executive Summary and Product Decisions
+The recommended product is a hyperlocal multi-vendor marketplace for packaged and filtered drinking water. A customer chooses an approved nearby shop, places a one-time or scheduled order, returns empty containers where applicable, and receives delivery from the supplier's own delivery operation. The platform earns commission and/or service fees and controls trust, discovery, transaction records and support.
+1.1 Product vision
+Make reliable drinking-water ordering as simple as ordering food, while giving local water suppliers a lightweight digital storefront, order book and returnable-container ledger.
+1.2 Problems being solved
+Customers often depend on calls or WhatsApp, cannot compare nearby shops, and have weak visibility into delivery status or water-quality evidence.
+Suppliers receive unstructured orders, lose track of empty jars/deposits, cannot measure repeat demand, and struggle to reach new local customers.
+The marketplace operator needs supplier verification, clear order evidence, configurable commission, dispute handling and trustworthy performance data.
+1.3 Recommended decisions
+Decision
+ | Recommendation
+ | Reason
+ | Mobile product
+ | One React Native app with role-based navigation
+ | Lower MVP cost; shared login, notifications, location and support. A user may switch roles if approved for both.
+ | Admin product
+ | Separate Laravel web portal
+ | Dense operational workflows, document review, reporting and permissions are better on web.
+ | Cart
+ | One supplier per cart
+ | Prevents complex split payments, mixed delivery fees and multi-supplier cancellation in MVP.
+ | Delivery
+ | Supplier-managed delivery first
+ | Avoids building a rider marketplace before demand is proven. Add rider sub-accounts in Phase 2.
+ | Payment
+ | COD first; regulated gateway second
+ | Reduces launch friction. Add Easypaisa/JazzCash/Raast through an approved merchant/acquirer integration.
+ | Discovery
+ | Default 5 km configurable radius
+ | Use fast geospatial filtering for discovery and route distance for final fee/ETA where needed.
+ | Containers
+ | Dedicated returnable-container ledger
+ | Empty jars and deposits are inventory/liability, not only a note on the order.
+ | Quality trust
+ | Admin-approved suppliers with expiry tracking
+ | Water is a safety-sensitive physical product; documents and latest test dates must be visible and monitored.
+ | 
+1.4 Success definition for the pilot
+At least 15–30 verified suppliers in one tightly defined Karachi launch zone before public marketing.
+A customer can find a serviceable shop, understand the empty-bottle rule, place COD order and receive delivery without calling support.
+A supplier can accept, prepare, dispatch and complete an order from the app in under one minute of active interaction.
+Admin can trace every price, status change, payment, container adjustment and user action involved in a dispute.
+Pilot targets: supplier acceptance above 85%, fulfillment above 90%, cancellation below 10%, and container discrepancy below 3%. Targets are initial hypotheses to be validated.
+2. Users, Roles and Product Components
+2.1 User roles
+Role
+ | Primary responsibility
+ | Access surface
+ | Guest
+ | Browse service availability and approved shops with limited details
+ | Mobile app
+ | Customer
+ | Manage addresses, order water, return containers, pay, review and seek support
+ | Mobile app – Customer mode
+ | Supplier owner
+ | Own verified shop, pricing, catalog, staff, orders, earnings and compliance
+ | Mobile app – Supplier mode
+ | Supplier manager
+ | Operate orders/catalog without access to ownership or payout changes
+ | Supplier mode with limited permissions
+ | Supplier delivery staff
+ | View assigned deliveries and update delivery proof/status
+ | Phase 2 supplier sub-account
+ | Support agent
+ | View customers/orders and resolve tickets without changing financial configuration
+ | Admin portal
+ | Compliance reviewer
+ | Verify supplier identity, licence and water-quality evidence
+ | Admin portal
+ | Finance admin
+ | Manage commissions, settlements, refunds and payouts
+ | Admin portal
+ | Super admin
+ | Manage users, permissions, platform settings and audit access
+ | Admin portal
+ | 
+2.2 Product components
+Mobile app: single Android/iOS codebase in TypeScript. Role selection controls navigation and feature permissions, but backend authorization remains the source of truth.
+Laravel API: authentication, geospatial shop discovery, catalog, pricing quote, orders, payments, containers, notifications, settlements and reports.
+Admin portal: responsive Laravel web application for approval, operations, finance, content, support, configuration and analytics.
+Background workers: push/SMS/email, supplier-acceptance timers, recurring order generation, document-expiry reminders, payment webhooks, exports and settlement jobs.
+Third-party services: maps/geocoding, SMS/OTP, Firebase Cloud Messaging, object storage/CDN, email and payment service provider.
+2.3 Role switching in one app
+A new user chooses Customer or Register as Supplier. Every valid supplier account may also use Customer mode.
+Supplier mode remains locked while application status is Draft, Under Review, Changes Required, Rejected, Suspended or Expired.
+If the same phone number owns both roles, Profile contains a clear Switch to Customer / Switch to Supplier action.
+Deep links and notifications must open the correct role and screen only after authorization is confirmed.
+Role state must never be trusted from local storage alone; fetch the current role and permissions after login and app resume.
+3. Business Model and Marketplace Rules
+3.1 Value to each side
+Customer value
+ | Supplier value
+ | Platform value
+ | Nearby verified shops, transparent rates, repeat ordering, delivery status and container record
+ | New local customers, structured orders, digital catalog, delivery control and sales reports
+ | Commission/service revenue, supplier network, data, standards and customer trust
+ | 
+3.2 Revenue options
+Commission per completed order: recommended starting model. Configure by supplier/category; charge only on eligible components such as product subtotal.
+Customer service fee: small fixed or percentage fee shown before checkout. Use carefully because low-ticket water orders are price-sensitive.
+Delivery fee share: supplier may retain all delivery fee or share a configured percentage if the platform later manages riders.
+Supplier subscription plan: Phase 3 option for premium placement, analytics, more branches or lower commission.
+Sponsored placement: clearly labeled promoted shops/products; organic ranking must remain trustworthy.
+3.3 Marketplace rules
+Only admin-approved shops appear in discovery. Suspended or document-expired shops stop receiving new orders but retain historical access.
+Each order belongs to one supplier branch, one delivery address, one currency (PKR) and one immutable pricing snapshot.
+Supplier controls item price, stock, delivery hours, minimum order and service area within admin limits.
+Platform controls allowed categories, commission, fee rules, cancellation policy, quality-document rules and moderation.
+Default ranking should consider serviceability, open status, recent fulfillment, ETA, rating and distance—not price alone.
+Customer phone/address is shared with a supplier only after order placement and only for fulfillment/support purposes.
+4. Supplier Registration and Verification
+Supplier verification is the trust foundation. The platform should distinguish between a reseller/distributor and a plant that filters or bottles water, because the required evidence is not identical. Final requirements must be confirmed with the relevant regulator and legal adviser.
+4.1 Supplier types
+Supplier type
+ | What it sells
+ | Verification focus
+ | Reseller / shop
+ | Sealed branded bottles/jars purchased from a producer or distributor
+ | Owner/shop identity, food-business licence where required, invoices/brand authorization and only approved brands.
+ | Filtration / refill plant
+ | Water filtered and filled/refilled by the business
+ | Plant and food-business licences, relevant PSQCA/authority evidence, laboratory reports, hygiene and packaging process.
+ | Brand distributor
+ | Authorized products for one or more brands
+ | Distributor authorization, producer certification, service territory and supply-chain evidence.
+ | Hybrid
+ | Own refill plus third-party brands
+ | All evidence applicable to both activities; catalog identifies producer/source per item.
+ | 
+4.2 Information and documents the supplier must provide
+Group
+ | Supplier provides
+ | Requirement
+ | Purpose
+ | Account identity
+ | Owner/full legal name, mobile OTP, email, profile photo
+ | Required
+ | Account security and communication
+ | Identity proof
+ | CNIC front/back; manual selfie match or controlled KYC review
+ | Required
+ | Owner verification and fraud prevention
+ | Business profile
+ | Shop/legal name, supplier type, description, years active
+ | Required
+ | Correct public listing and risk classification
+ | Location
+ | Full address, landmark, city/area, GPS pin, pickup point
+ | Required
+ | 5 km discovery and delivery serviceability
+ | Contact
+ | Order phone, WhatsApp (optional), support contact
+ | Required
+ | Fulfillment and escalation
+ | Shop evidence
+ | Front photo/signboard and inside/plant photos
+ | Required
+ | Operational verification; do not show private evidence publicly
+ | Business/food licence
+ | Sindh Food Authority or relevant provincial/local licence
+ | Conditionally required
+ | Food-business compliance; verify licence number and expiry
+ | PSQCA / product evidence
+ | Applicable certification/licence for bottled drinking water or producer evidence
+ | Conditionally required
+ | Bottled drinking water is listed as a compulsory standards item [S6]
+ | Water test report
+ | Latest accredited laboratory report; test date and expiry/retest date
+ | Required for producer/refill; recommended for reseller brands
+ | Safety and trust; schedule re-verification
+ | Brand authorization
+ | Distributor letter, supplier invoice or relationship evidence
+ | For reseller/distributor
+ | Prevent unverified brands and counterfeit listings
+ | Payout details
+ | Bank title, IBAN/account or supported wallet; title matching owner/business
+ | Required before first payout
+ | Settlement and fraud control
+ | Operations
+ | Hours, holidays, delivery radius, zones, minimum order, fee, average ETA, daily capacity
+ | Required
+ | Accurate availability and order promise
+ | Catalog setup
+ | Products, size, pack, price, deposit, exchange rule, stock and image
+ | Required before activation
+ | Correct checkout and container accounting
+ | Agreement
+ | Terms, commission, refunds, quality responsibilities and data use acceptance
+ | Required
+ | Commercial and operational consent
+ | 
+Compliance note: Do not hard-code one document list for every supplier. Admin settings should define required document types by city, supplier type and product category, including issue date, expiry date, reviewer, status and rejection reason.
+ | 
+4.3 Application lifecycle
+Draft – supplier can save and continue later.
+Submitted – fields are locked except contacts until reviewer action.
+Under review – compliance team verifies identity, location, documents and catalog.
+Changes required – reviewer identifies exact missing/invalid items; supplier resubmits.
+Approved – shop can finish catalog and activate after payout and operating settings are valid.
+Rejected – reason and appeal route recorded; repeated applications remain linked.
+Suspended – shop hidden for policy, quality, fraud or performance issue; active-order handling defined.
+Expired – one or more mandatory documents expired; new orders paused until renewal approval.
+4.4 Ongoing compliance controls
+Automated reminders 30, 14, 7 and 1 day before required document expiry.
+Admin dashboard for expiring, expired, rejected and never-reviewed evidence.
+Version history: previous file, new file, uploader, reviewer, decision time and notes remain auditable.
+Quality badge shows only the verified evidence type and valid-through date; never imply platform laboratory certification.
+Periodic spot checks and complaint-triggered re-review; admin may pause only affected products or the whole shop.
+PCRWR/authority report checks may be used by operations as an additional signal, not as the only supplier decision.
+5. Functional Modules
+5.1 Customer modules
+Module
+ | Capabilities
+ | Release
+ | Onboarding and authentication
+ | Phone OTP, optional email, terms/consent, role selection, secure logout and device management
+ | MVP
+ | Location and addresses
+ | Permission education, current location, map pin, manual address, landmark, label and default address
+ | MVP
+ | Nearby shop discovery
+ | Serviceable shops within default 5 km; list/map, open/closed, ETA, minimum order and quality badge
+ | MVP
+ | Search and filters
+ | Shop/product search; bottle size, price, rating, delivery time, open now, deposit/exchange and brand filters
+ | MVP basic
+ | Shop storefront
+ | Profile, address, hours, service details, verified evidence summary, rating, delivery policy and catalog
+ | MVP
+ | Catalog and product detail
+ | Bottle/jar size, pack, source/brand, price, stock, returnability, deposit, images and description
+ | MVP
+ | Cart
+ | One shop only, quantity edit, server-side quote, minimum-order warning and cart expiry/revalidation
+ | MVP
+ | Empty bottle declaration
+ | Returned empty quantity by container type; deposit/shortage preview and clear explanation
+ | MVP
+ | Checkout
+ | Address, delivery slot, instructions, contact, payment, coupon, fee breakdown and final confirmation
+ | MVP; slots optional
+ | Order tracking
+ | Status timeline, supplier contact, ETA, item/price snapshot, cancellation eligibility and delivery OTP
+ | MVP
+ | Reorder / favorites
+ | Repeat previous shop/order with fresh price/stock validation; favorite suppliers/products
+ | MVP reorder
+ | Payments and refunds
+ | COD first; online payment, payment state, refund state and receipt in Phase 2
+ | MVP COD
+ | Recurring delivery
+ | Schedule, quantity, preferred slot, pause/skip/resume, next order and payment failure handling
+ | Phase 2
+ | Container wallet
+ | Supplier/brand/size-wise empties owed, deposit paid, returns and adjustments
+ | MVP history; enhanced Phase 2
+ | Ratings and reviews
+ | Delivered orders only; shop/product rating, comments, moderation and supplier response
+ | Phase 2
+ | Notifications
+ | Push plus in-app inbox for order, delivery, payment, subscription, promotion and support events
+ | MVP order notifications
+ | Support
+ | FAQ, ticket, order-linked complaint, photo evidence, status and escalation
+ | MVP basic
+ | Profile and settings
+ | Name, language, privacy, notification preferences, addresses, account deletion request
+ | MVP
+ | 
+5.2 Supplier modules
+Module
+ | Capabilities
+ | Release
+ | Supplier onboarding
+ | Multi-step profile, document upload, validation, status and reviewer feedback
+ | MVP
+ | Dashboard
+ | New/pending orders, today's sales, fulfillment, low stock, open/closed and compliance alerts
+ | MVP
+ | Shop profile
+ | Public details, photos, contact, branch, holidays, pause store and temporary closure
+ | MVP
+ | Service area and fees
+ | Radius/zone, min order, delivery fee, free-delivery threshold, ETA and daily capacity
+ | MVP
+ | Catalog
+ | Create/edit products, size, pack, return rule, deposit, price, images, active state
+ | MVP
+ | Inventory
+ | In/out-of-stock, available quantity, low-stock threshold and bulk update
+ | MVP simple
+ | Order inbox
+ | Audible/push alert, accept/reject with reason, response timer and order detail
+ | MVP
+ | Fulfillment
+ | Preparing, ready, out for delivery, delivered; notes, customer contact and delivery OTP
+ | MVP
+ | Container ledger
+ | Expected empties, actual returned, shortage, deposit collected/refunded and manual adjustment approval
+ | MVP
+ | Delivery staff
+ | Owner-managed delivery first; rider sub-accounts, assignment and live location later
+ | Phase 2
+ | Earnings
+ | Order gross, commission, fees, refunds, net earnings and settlement status
+ | MVP summary
+ | Payout account
+ | Verified IBAN/account/wallet, change lock and admin re-approval
+ | MVP before payouts
+ | Statements
+ | Date filters, downloadable order/settlement/container reports
+ | Phase 2
+ | Promotions
+ | Shop-funded discounts, coupons, limits and schedule subject to admin rules
+ | Phase 2
+ | Reviews
+ | View rating and respond; flag policy violations
+ | Phase 2
+ | Staff and permissions
+ | Manager/order operator/delivery roles, invite/revoke and action logs
+ | Phase 2
+ | Compliance center
+ | Documents, expiry, renewal, reviewer feedback and shop activation impact
+ | MVP
+ | Support
+ | Supplier tickets, disputed order evidence and platform announcements
+ | MVP basic
+ | 
+5.3 Admin portal modules
+Module
+ | Capabilities
+ | Release
+ | Admin authentication/RBAC
+ | MFA-ready login, roles, granular permissions, session controls
+ | MVP
+ | Operations dashboard
+ | Orders, exceptions, pending approvals, supplier status and top KPIs
+ | MVP
+ | Supplier approval
+ | Application queue, evidence viewer, checklist, notes, changes/reject/approve
+ | MVP
+ | Compliance
+ | Document types, expiry rules, reminders, suspensions and evidence history
+ | MVP
+ | Customer management
+ | Profile, addresses summary, flags, orders, support and account state
+ | MVP
+ | Shop/branch management
+ | Activation, radius, ranking controls, closure, capacity and performance
+ | MVP
+ | Catalog moderation
+ | Categories, brands, container types, product approval and prohibited claims
+ | MVP
+ | Order operations
+ | Search, timeline, override with reason, reassignment policy, evidence and export
+ | MVP
+ | Payments/refunds
+ | Transaction/webhook state, reconciliation, refunds and failure queue
+ | Phase 2 with online pay
+ | Commission/settlement
+ | Rules, ledger, settlement cycles, payout holds and statements
+ | MVP manual; automate Phase 2
+ | Container disputes
+ | Expected vs actual return, evidence, financial adjustment and audit
+ | MVP
+ | Promotions/content
+ | Banners, coupons, campaign targeting, terms and scheduling
+ | Phase 2
+ | Ratings/moderation
+ | Review queue, abuse reports, removal reason and supplier response
+ | Phase 2
+ | Support/disputes
+ | Ticket SLA, assignment, internal notes, templates and resolution
+ | MVP basic
+ | Notifications
+ | Transactional templates, audience campaigns and send logs
+ | MVP templates
+ | Geography/settings
+ | Cities, areas, default radius, fees, tax, cancellation and app config
+ | MVP
+ | Reports/analytics
+ | Orders, GMV, repeat rate, supplier score, cancellations, deposits and payouts
+ | MVP basic
+ | Audit/logs
+ | Actor, action, old/new values, IP/device, timestamp and reason
+ | MVP
+ | 
+6. End-to-End Workflows
+6.1 Customer one-time order
+Customer selects/adds an address; backend geocodes and validates serviceability.
+Backend returns only approved, active and currently serviceable shops; default discovery radius is 5 km.
+Customer opens one shop, adds items and states how many valid empty containers will be returned.
+Backend generates a quote: item snapshot, deposit/shortage, delivery, service fee, discount and total; quote has an expiry time.
+Customer selects COD (MVP) and confirms. Client sends an idempotency key so double taps cannot create duplicate orders.
+Supplier receives a high-priority alert and accepts or rejects within the configured timer.
+Supplier marks Preparing, then Out for Delivery. Customer receives status notifications.
+At delivery, supplier records actual valid empties, collects/returns any difference, and enters customer delivery OTP or proof.
+Backend completes the order, updates container and financial ledgers, creates earnings/commission entries, and enables reorder/review.
+6.2 Supplier application
+Create account with phone OTP and choose supplier type.
+Enter owner/business identity and place shop GPS pin.
+Upload required documents; fields adapt to supplier type and city.
+Configure hours, service area, fee, minimum order and payout details.
+Add at least one valid product with price, container type and deposit/exchange rule.
+Submit and receive an immutable submission reference.
+Admin checks evidence and either requests precise changes, rejects, or approves.
+After approval and catalog readiness, supplier activates the shop and receives a test-order checklist.
+6.3 Recurring delivery (Phase 2)
+Customer selects shop, products, frequency (for example weekly), preferred day/slot, start date and empty-container expectation.
+Subscription is a schedule template; every occurrence creates a normal order with a fresh price/stock quote and unique payment state.
+Customer can skip the next occurrence, pause, resume or cancel before a cutoff. Supplier cannot silently change the schedule.
+If shop is closed/out of stock, notify both sides and request customer action; do not auto-substitute without explicit consent.
+Online payment failure produces Payment Required and retry flow; it must not create a fulfillable order until policy conditions are satisfied.
+6.4 Cancellation, rejection and refund
+Before supplier acceptance: customer may cancel; online authorization is voided/refunded automatically where supported.
+After acceptance but before dispatch: configurable cancellation; customer chooses reason and may incur a clearly disclosed fee only if legally/commercially approved.
+After Out for Delivery: normal cancellation disabled; support-led exception with reason and evidence.
+Supplier rejection requires reason (out of stock, capacity, address, closed, other). Repeated rejection affects ranking/performance.
+All refunds have requested, processing, succeeded and failed states; an order must not be labeled Refunded solely because a request was created.
+
+7. Empty Bottle / Jar Deposit System
+Returnable containers are a first-class inventory and financial feature. The system must know which supplier, brand and size owns each liability. A generic 'empty bottle: yes/no' field is not sufficient.
+7.1 Container modes
+Mode
+ | Checkout behavior
+ | Delivery behavior
+ | Non-returnable
+ | No empty or deposit question
+ | Normal item delivery
+ | Exchange required
+ | Customer declares same valid empty quantity
+ | Shortfall becomes configured deposit/charge or order exception
+ | Refundable deposit
+ | New container adds deposit; customer may return later
+ | Valid return creates deposit credit/refund according to policy
+ | Refill-only
+ | Requires eligible customer-owned/recorded container
+ | Supplier validates container; rejected/damaged container policy applies
+ | 
+7.2 Data tracked per transaction
+Container type: size/capacity, brand compatibility, supplier ownership and deposit value.
+Ordered full quantity, expected empty return, actual valid empty return, damaged/rejected quantity and shortage.
+Deposit charged, deposit returned/credited, adjustment reason, actor and proof/photo if disputed.
+Customer container balance and supplier container inventory/receivable by container type.
+The exact deposit rate snapshot at order time; later rate changes must not rewrite history.
+7.3 Recommended rules
+Default: accept an empty only for the same supplier/brand/size compatibility group. Cross-brand exchange requires explicit admin configuration.
+Customer may declare fewer empties than ordered; quote immediately adds deposit for the shortfall.
+Actual delivery quantity overrides declared quantity only after supplier records it and customer receives a receipt/notification.
+Manual ledger adjustments require a reason. Above a configured PKR/quantity threshold, admin approval is required.
+A returned deposit is a financial event and must link to payment/refund/credit evidence—not only change a container count.
+Disputed or damaged empties remain in a Pending Review state until resolved; do not silently charge the customer.
+7.4 Example calculation
+Line
+ | Calculation
+ | Amount
+ | Water
+ | 2 × PKR 250
+ | PKR 500
+ | Expected empties
+ | 2 jars
+ | —
+ | Customer returns
+ | 1 valid jar
+ | —
+ | Deposit shortfall
+ | 1 × PKR 800
+ | PKR 800
+ | Delivery fee
+ | Configured shop fee
+ | PKR 100
+ | Order total
+ | 500 + 800 + 100
+ | PKR 1,400
+ | 
+Important: Deposit money should normally be excluded from marketplace commission because it represents a refundable container liability. Keep this configurable and confirm the accounting treatment with finance.
+ | 
+8. Order, Pricing, Payment and Settlement Rules
+8.1 Order states and owners
+State
+ | Who can set it
+ | Required behavior
+ | Placed
+ | System after valid confirmation
+ | Reserve/validate stock, start supplier response timer, notify supplier
+ | Accepted
+ | Supplier
+ | Commit fulfillment; record acceptance time and promised ETA
+ | Rejected
+ | Supplier/system
+ | Reason required; release stock; cancel/void/refund as applicable
+ | Preparing
+ | Supplier
+ | Customer cannot freely edit; cancellation policy applies
+ | Out for delivery
+ | Supplier/delivery staff
+ | Record dispatch time; show contact/ETA; restrict cancellation
+ | Delivered
+ | Supplier with OTP/proof
+ | Record actual empties and collection; waiting for final transaction commit if needed
+ | Completed
+ | System
+ | Post ledgers, earnings, commission and review eligibility
+ | Cancelled
+ | Customer/supplier/admin/system
+ | Actor/reason required; inventory and payment compensation is atomic/idempotent
+ | Refund pending/succeeded/failed
+ | Payment workflow
+ | Separate from order state; visible reconciliation trail
+ | 
+8.2 Pricing formula
+Customer total: Product subtotal + delivery fee + platform service fee + container deposit/shortage + applicable tax − item/coupon discounts − eligible credits.
+ | 
+Supplier net: Eligible product revenue + supplier-owned delivery revenue − marketplace commission − supplier-funded discounts − refunds/adjustments ± settlement corrections. Deposits remain a separate liability/ledger component.
+ | 
+Backend is authoritative for price and fee calculation. Mobile submits item IDs/quantities and displays the signed/versioned quote response.
+Order items store product name, SKU, price, deposit, tax and discount snapshots so history survives later catalog edits.
+Use integer minor units (paisa) in calculation/storage or a decimal money type; never binary floating-point for financial totals.
+Quote expires (for example, after 10 minutes). Checkout must revalidate stock, hours, serviceability and total.
+8.3 Payments
+Method
+ | MVP behavior
+ | Later controls
+ | Cash on delivery
+ | Supplier collects final payable amount; collection confirmed with delivery completion
+ | Cash discrepancy and supplier settlement deduction workflow
+ | Easypaisa/JazzCash
+ | Not required for first pilot
+ | Gateway checkout, webhook signature, idempotency, reconciliation, refund and settlement reports
+ | Raast P2M / QR
+ | Optional payment-on-delivery QR
+ | Use a regulated acquiring/payment partner; dynamic reference and confirmed callback where available
+ | Cards
+ | Optional Phase 2
+ | 3DS/provider checkout, tokenization by provider, chargeback and refund tracking; platform must not store raw card data
+ | 
+8.4 Supplier settlement
+Every completed order creates immutable ledger entries; a settlement groups eligible entries for a defined period.
+Recommended pilot: weekly settlement with a 2–3 day dispute buffer; actual policy depends on payment and commercial model.
+Payout states: Draft, Approved, Processing, Paid, Failed, Held, Reversed. Paid requires reference and date.
+Changing payout account requires OTP and admin re-verification; apply a temporary payout hold after change.
+Statement shows order IDs, gross, commission, delivery, discounts, refunds, adjustments, deposits/liability and net payout.
+9. Screen Inventory and Notifications
+9.1 Customer screen inventory
+Area
+ | Screens
+ | Entry
+ | Splash, onboarding, select role, phone, OTP, terms, location permission
+ | Home/discovery
+ | Address selector, nearby shops, search, filters, list/map, favorites
+ | Shop/catalog
+ | Shop profile, category/product list, product detail, quality evidence summary
+ | Checkout
+ | Cart, empty-container selection, address, slot/instructions, coupon, payment, review order, success
+ | Orders
+ | Active orders, order detail/timeline, cancel reason, delivery OTP, invoice/receipt, order history, reorder
+ | Subscriptions
+ | Plans/schedules, create schedule, next deliveries, skip/pause/resume/cancel – Phase 2
+ | Account
+ | Profile, addresses, container wallet/history, payments/refunds, notifications, language/privacy, help/tickets
+ | 
+9.2 Supplier screen inventory
+Area
+ | Screens
+ | Application
+ | Supplier type, owner identity, shop details, GPS pin, documents, operations, payout, review, status
+ | Dashboard
+ | Open/closed control, alerts, new orders, today summary, compliance/stock warnings
+ | Orders
+ | Order inbox, order detail, accept/reject, preparation, dispatch, delivery OTP/proof, cancellation/dispute
+ | Catalog
+ | Products, add/edit product, stock quick update, categories, container/deposit settings
+ | Operations
+ | Hours/holidays, service radius/zones, fees, minimum order, capacity, delivery staff – later
+ | Finance
+ | Earnings, commission detail, settlements, payout account, statements
+ | Account
+ | Shop profile, compliance documents, reviews, staff, notifications, support, role switch
+ | 
+9.3 Admin screen inventory
+Login/MFA, dashboard and exception queues.
+Supplier application list/detail, document viewer, approval checklist and decision history.
+Customers, suppliers, branches, products, categories, brands and container types.
+Orders, payment/refund reconciliation, container disputes, support tickets and reviews.
+Commission rules, settlement runs, payouts, promotions, notification templates and reports.
+Cities/areas, radius/fee/cancellation settings, roles/permissions and audit log.
+9.4 Transactional notification matrix
+Event
+ | Recipient
+ | Channel
+ | Required content
+ | Supplier application submitted
+ | Supplier
+ | Push + in-app
+ | Reference and expected review time
+ | Changes required / approved / rejected
+ | Supplier
+ | Push + in-app; SMS optional
+ | Decision and exact next action
+ | New order
+ | Supplier
+ | High-priority push + in-app
+ | Order, amount, distance, response countdown
+ | Order accepted/rejected
+ | Customer
+ | Push + in-app
+ | Status, reason and refund/reorder action
+ | Preparing / out for delivery
+ | Customer
+ | Push + in-app
+ | ETA and supplier contact
+ | Delivered/completed
+ | Customer + supplier
+ | Push + in-app
+ | Final amount, empties, deposit and receipt
+ | Payment/refund update
+ | Customer; finance exception
+ | Push/in-app; admin alert on failure
+ | Reference, amount, final state
+ | Document expiring
+ | Supplier + compliance
+ | In-app + push/email
+ | Document, expiry and upload action
+ | Subscription upcoming/failed
+ | Customer + supplier as relevant
+ | Push + in-app
+ | Date, items and required action
+ | Support reply/resolution
+ | Ticket participant
+ | Push + in-app
+ | Ticket status and message
+ | 
+10. Technical Architecture
+Use a modular monolith for the MVP: one deployable Laravel application with clearly separated domains. This keeps transactions and delivery speed manageable while preserving boundaries for future services.
+
+10.1 Recommended stack (as of 18 July 2026)
+Layer
+ | Recommendation
+ | Notes
+ | Mobile
+ | React Native 0.86 + TypeScript
+ | 0.86 is the latest stable release at research time [S1]. Use New Architecture-compatible libraries.
+ | Navigation
+ | React Navigation
+ | Separate CustomerStack and SupplierStack behind server-validated permissions.
+ | Client state
+ | Redux Toolkit for auth/cart/app state + TanStack Query or RTK Query for server cache
+ | Avoid duplicating API data in multiple stores. Persist only safe essentials.
+ | Backend
+ | Laravel 13 on PHP 8.3+
+ | Laravel 13 requires minimum PHP 8.3 and has security support through March 2028 [S2].
+ | Auth
+ | Laravel Sanctum
+ | Bearer tokens for mobile; session/cookie + CSRF for first-party admin portal [S3].
+ | Database
+ | PostgreSQL + PostGIS recommended
+ | Strong geospatial queries. MySQL 8 spatial is acceptable if it better matches team operations.
+ | Cache/queues
+ | Redis + Laravel queues/Horizon
+ | Order timers, notifications, webhooks, exports and recurring generation. Laravel supports priority queues [S4].
+ | Storage
+ | S3-compatible private object storage + CDN
+ | Signed URLs for private documents; optimized public product/shop images.
+ | Push
+ | Firebase Cloud Messaging
+ | Cross-platform notification/data messages from trusted backend [S5].
+ | Maps
+ | Google Maps/Places/Geocoding + Routes API
+ | Use Compute Route Matrix for route distance/duration; cache and restrict API keys [S10].
+ | Admin UI
+ | Laravel Blade/Livewire or equivalent server-rendered admin
+ | Fastest MVP path; do not expose mobile tokens to admin web.
+ | Observability
+ | Structured logs, crash reporting, API tracing and alerting
+ | Correlate request ID, user, order, payment and queue job.
+ | 
+10.2 Backend domains
+Identity and Access
+Supplier and Compliance
+Catalog and Inventory
+Geography and Serviceability
+Cart and Pricing
+Orders and Fulfillment
+Containers
+Payments and Refunds
+Commission, Ledger and Settlements
+Subscriptions
+Notifications
+Support and Disputes
+Content and Promotions
+Reporting and Audit
+10.3 Geospatial approach
+Store normalized latitude/longitude plus a geospatial point for every address and supplier branch.
+Discovery: database spatial/radius query returns candidate active shops within the configured straight-line radius.
+Serviceability: check supplier polygon/radius, operating hours, capacity, minimum order and product availability.
+Final ETA/delivery fee: use configured zone or route distance; call Routes API only where it changes the decision, then cache briefly.
+Never expose unrestricted Maps server keys in the mobile bundle. Apply application restrictions, API restrictions and quotas.
+10.4 API and event conventions
+Version every public endpoint under /api/v1 and use consistent JSON success/error envelopes.
+Use request validation, policies/permissions and resource serialization. Client-hidden buttons are not authorization.
+Cursor pagination for product/order/inbox feeds; Laravel documents it as suitable for large data sets and infinite scroll [S11].
+Idempotency-Key required for order creation, online payment initiation, webhook processing, refunds and manual adjustments.
+Create domain events after database commit (OrderPlaced, OrderAccepted, DeliveryCompleted, PaymentSucceeded, ContainerAdjusted).
+Outbox/retry pattern recommended for critical integrations so a database commit cannot silently lose its notification or payment event.
+10.5 Performance-aware mobile implementation
+Home/product APIs must be paginated; do not return the entire catalog. Initial page target: 15–20 items.
+Serve a listing thumbnail around 400×400 in WebP/AVIF, normally under 100–150 KB; detail image around 1000 px, normally under 250 KB. Validate with real content and quality needs.
+Use CDN URLs and responsive variants; never send Base64 images or supplier documents inside normal JSON responses.
+Stable list keys, memoized product cards, shallow render tree and image caching. Keep pricing/container calculation off the list card.
+Use API gzip/Brotli where supported, database indexes, response field selection and cached shop summaries.
+Measure release builds on low/mid-range Android devices; React Native performance guidance recommends profiling with development mode disabled [S12].
+11. Data Model
+The following is a logical schema, not the final migrations. Every financial, status and container record should use append-only history/ledger patterns where practical.
+Entity
+ | Key purpose / fields
+ | users
+ | id, phone, email, name, status, locale, last_login_at
+ | roles / user_roles
+ | role and relationship; supplier staff links to supplier/branch
+ | user_devices
+ | platform, device_id, FCM token, app version, last_seen, active
+ | addresses
+ | user, label, full text, landmark, city/area, geo point, geocode metadata
+ | supplier_profiles
+ | owner, type, legal/business identity, application status, reviewer timestamps
+ | shops
+ | supplier, branch, public name, location, contact, status, rating, capacity
+ | supplier_documents
+ | type, file, number, issue/expiry, status, reviewer, version, reason
+ | service_zones
+ | shop, type radius/polygon, value, fee, minimum order, ETA
+ | business_hours / holidays
+ | shop, day, intervals, date override, closure reason
+ | categories / brands
+ | platform-owned catalog classifications and approved brand metadata
+ | products
+ | canonical name, brand, size, unit/pack, container type, active
+ | shop_products
+ | shop listing, price, deposit, return mode, stock, images, SKU, active
+ | inventory_movements
+ | shop product, quantity change, source order/manual, actor, reason
+ | carts / cart_items
+ | customer, shop, items, quantities, declared empties, quote version/expiry
+ | orders
+ | number, customer, shop, address snapshot, totals, order/payment/fulfillment states
+ | order_items
+ | product snapshot, quantity, unit price, discount, container/deposit snapshot
+ | order_status_history
+ | from/to state, actor, reason, timestamp, metadata
+ | deliveries / delivery_proofs
+ | assignment, dispatch/delivery time, OTP hash, photo/signature metadata
+ | container_types
+ | brand/size/compatibility, default deposit, return rules
+ | container_transactions
+ | order/customer/shop/type, expected, returned, damaged, charged/refunded, state
+ | payments
+ | provider, method, amount, currency, state, reference, idempotency, raw-event reference
+ | refunds
+ | payment/order, amount, reason, requested/processed state, provider reference
+ | ledger_entries
+ | account, order/payment/settlement, debit/credit, category, immutable reference
+ | commission_rules
+ | scope, rate/fixed, eligible components, dates and priority
+ | settlements / settlement_lines
+ | supplier, period, totals, state, included ledger entries
+ | payout_accounts / payouts
+ | verified destination, change history, amount, state, reference
+ | subscriptions / subscription_items
+ | customer/shop, schedule, next run, status, products, slot
+ | promotions / coupons / redemptions
+ | owner, rules, dates, budget, usage limits and outcome
+ | reviews
+ | order, customer, shop/product, score, text, moderation, response
+ | support_tickets / messages
+ | requester, order link, category, SLA, assignee, status, attachments
+ | disputes
+ | order/payment/container, evidence, owner, resolution and financial adjustment
+ | notifications
+ | template/event, recipient, channel, payload, sent/delivered/read state
+ | audit_logs
+ | actor, action, entity, old/new values, IP/device, reason, timestamp
+ | app_settings
+ | versioned config by global/city/supplier/category scope
+ | 
+11.1 Critical database constraints
+Unique normalized phone and explicit soft-delete/account-state policy.
+Money fields non-negative where appropriate; order total equals persisted component sum.
+One active cart supplier per customer; one successful payment capture per provider reference/idempotency key.
+Valid order-state transitions enforced inside transactional services, not by arbitrary status update endpoints.
+Ledger entries are immutable; corrections post reversing/adjusting entries.
+Foreign keys/indexes for customer, shop, order state/time, payment reference, document expiry and geospatial point.
+12. API Scope
+This catalog identifies the required endpoint groups. Exact request/response schemas should be finalized as an OpenAPI 3 specification before implementation.
+Domain
+ | Representative endpoints
+ | Auth
+ | POST /auth/request-otp; /verify-otp; /logout; GET /me; GET /me/permissions
+ | Devices
+ | POST /devices; DELETE /devices/{id}; PATCH /notification-preferences
+ | Addresses
+ | GET/POST /addresses; PATCH/DELETE /addresses/{id}; POST /addresses/validate
+ | Discovery
+ | GET /shops/nearby; /shops/{id}; /shops/{id}/products; GET /search/suggestions
+ | Catalog
+ | GET /categories; /brands; /products/{id}; all lists paginated and field-limited
+ | Cart/quote
+ | GET/POST /cart; PATCH/DELETE /cart/items/{id}; POST /cart/quote; POST /cart/apply-coupon
+ | Customer orders
+ | POST /orders; GET /orders; /orders/{id}; POST /orders/{id}/cancel; /reorder
+ | Delivery
+ | GET /orders/{id}/tracking; POST /orders/{id}/delivery-otp/resend where allowed
+ | Containers
+ | GET /container-balances; /container-transactions; POST /orders/{id}/container-dispute
+ | Payments
+ | POST /payments/initiate; GET /payments/{id}; POST /payments/webhooks/{provider}; POST /refunds
+ | Subscriptions
+ | GET/POST /subscriptions; PATCH /subscriptions/{id}; POST /skip, /pause, /resume, /cancel
+ | Reviews
+ | POST /orders/{id}/review; GET /shops/{id}/reviews; PATCH /reviews/{id}
+ | Support
+ | GET/POST /tickets; GET /tickets/{id}; POST /tickets/{id}/messages/attachments
+ | Supplier application
+ | GET/POST /supplier/application; POST /documents; /submit; GET /application/status
+ | Supplier shop
+ | GET/PATCH /supplier/shop; /hours; /holidays; /service-zones; POST /open; /pause
+ | Supplier catalog
+ | GET/POST /supplier/products; PATCH /products/{id}; POST /stock/bulk
+ | Supplier orders
+ | GET /supplier/orders; GET /{id}; POST /accept; /reject; /preparing; /dispatch; /deliver
+ | Supplier containers
+ | POST /supplier/orders/{id}/containers/confirm; GET /supplier/container-ledger
+ | Supplier finance
+ | GET /supplier/earnings; /settlements; /statements; GET/PATCH /payout-account
+ | Supplier staff
+ | GET/POST /supplier/staff; PATCH/DELETE /staff/{id}; POST /deliveries/{id}/assign – Phase 2
+ | Admin web/API
+ | Supplier review, orders, payments, settlements, disputes, content, settings, reports and audit; session-authenticated and permission-scoped
+ | 
+12.1 Response and error standard
+Success includes data plus meta for pagination/quote/version as applicable.
+Validation returns field-level codes/messages; app maps codes to localized copy.
+Business errors use stable codes such as SHOP_CLOSED, OUT_OF_STOCK, ADDRESS_NOT_SERVICEABLE, QUOTE_EXPIRED, INVALID_CONTAINER_RETURN and PAYMENT_PENDING.
+Every response includes or echoes a request/correlation ID. Logs must not expose OTPs, tokens, CNIC images or payment secrets.
+409 for state/idempotency conflicts, 422 for validation/business input, 401/403 for authentication/authorization, 429 for rate limits.
+13. Security, Privacy and Compliance
+13.1 Authentication and authorization
+OTP endpoints: per-phone, per-IP and per-device throttling; cooldown, expiry, maximum attempts and abuse monitoring.
+Use short/controlled mobile token lifetime, device name, revoke-on-logout and server-side account-state checks. Store tokens only in OS secure storage.
+Admin portal uses secure sessions, CSRF protection, least-privilege RBAC and MFA for finance/super-admin roles.
+Laravel policies/permissions protect every supplier-owned resource; a supplier cannot guess another supplier's IDs.
+Sensitive actions require step-up verification: payout change, high-value refund, container adjustment, role grant and account deletion.
+13.2 Data protection
+TLS everywhere; encrypt high-risk fields at rest; secrets in managed environment/secret store, never committed to Git.
+CNIC and compliance files use private storage, signed short-lived URLs and explicit viewer permissions; watermark/download logging recommended.
+Collect minimum data; define retention for OTP logs, exact location, identity documents, tickets, financial records and deleted accounts.
+Do not send CNIC, payment details, full address or access tokens to crash reports/analytics. Redact structured logs.
+Provide privacy notice, terms, supplier agreement, cancellation/refund policy, prohibited products/claims and account deletion/contact route.
+13.3 Water quality and supplier compliance
+PSQCA lists Bottled Drinking Water (PS 4639) among compulsory standards items [S6]; applicability and evidence must be legally reviewed for each supplier type.
+Sindh Food Authority's published licensing flow requests identity verification, business details and products/services, plus the applicable fee [S7].
+PCRWR publishes quarterly bottled-water monitoring. Its Jan–Mar 2026 report summarized 228 brands sampled and 193 (85%) overall safe, reinforcing the need for evidence and expiry monitoring [S8].
+The app should show evidence type, issuer, last verified date and expiry without making unsupported medical or purity claims.
+Platform terms must state supplier responsibility for product quality, lawful operation, labeling, packaging, delivery hygiene and recall cooperation.
+Legal review required: This specification is product/technical guidance, not legal advice. Before launch, obtain written review for SFA/PSQCA applicability, tax/invoicing, consumer/refund terms, payments, privacy, records, marketing claims and supplier agreements.
+ | 
+14. Non-Functional Requirements
+Quality area
+ | Initial requirement
+ | Availability
+ | MVP monthly API availability target 99.5%, excluding announced maintenance; define status/incident process
+ | API latency
+ | p95 under 1.5 s for normal reads and under 2.5 s for quote/order actions, excluding slow third parties; measure by endpoint
+ | Mobile launch
+ | Usable home state around 3 s on representative mid-range Android/4G after normal authentication; skeleton/offline states
+ | Scalability
+ | Stateless API nodes, Redis cache/queues, indexed spatial queries and paginated feeds; load-test before campaign
+ | Correctness
+ | Idempotent order/payment/refund/container operations; transactional ledgers and state-transition guards
+ | Reliability
+ | Retries with exponential backoff, dead-letter/failed-job review, webhook replay and integration circuit controls
+ | Data recovery
+ | MVP RPO ≤24 hours and RTO ≤4 hours; move to point-in-time recovery and lower RPO before material scale
+ | Mobile quality
+ | Crash-free users ≥99.5%; ANR/crash/API failure monitoring by version/device
+ | Accessibility
+ | Scalable text, labeled controls, 44×44 pt touch targets, contrast, screen-reader order and non-color status cues
+ | Localization
+ | English and Urdu-ready strings; do not hard-code copy or currency formatting in components
+ | Compatibility
+ | Define supported Android/iOS versions before build; test low-memory Android and current OS releases
+ | Observability
+ | Request/order/payment IDs, metrics, traces, queue health, structured audit and alert ownership
+ | 
+14.1 Failure and offline behavior
+Browse cached last-known shop/product data with a visible offline/stale indicator; never allow offline final order submission without server confirmation.
+After a checkout timeout, query by idempotency key/order lookup before offering Retry to prevent duplicates.
+If maps fail, allow manual address entry and store unverified coordinates/status for review; clearly explain serviceability uncertainty.
+If push is delayed, in-app polling/resume refresh must still show the correct order state. Push is a hint, not the source of truth.
+If payment callback is delayed, display Processing and reconcile asynchronously; never ask the user to pay twice immediately.
+15. Analytics and Reporting
+15.1 Core marketplace KPIs
+Area
+ | Metrics
+ | Supply
+ | Approved/active shops, coverage by area, open hours, product availability, daily capacity
+ | Demand
+ | New/active customers, address coverage, searches, shop/product views, cart starts
+ | Conversion
+ | View→cart, cart→checkout, checkout→placed, placed→accepted, accepted→completed
+ | Fulfillment
+ | Acceptance time, preparation time, delivery time, on-time rate, rejection/cancellation reasons
+ | Retention
+ | Repeat order rate, reorder interval, cohort retention, subscription pause/churn
+ | Quality/trust
+ | Rating, complaint rate, quality-document expiry, refund/dispute rate
+ | Containers
+ | Expected/returned/short/damaged, deposit charged/refunded, unresolved discrepancies
+ | Finance
+ | GMV, product revenue, delivery/service fees, commission, discounts, refunds, net supplier payout
+ | Reliability
+ | API p95/error rate, crash-free users, queue delay, payment/webhook failures, notification delivery
+ | 
+15.2 Required event analytics
+app_opened, role_selected, location_result, address_saved, shops_loaded, search_performed
+shop_viewed, product_viewed, add_to_cart, empty_return_set, quote_viewed, checkout_started
+order_placed, supplier_accepted/rejected, order_status_changed, order_completed/cancelled
+payment_started/succeeded/failed, refund_requested/succeeded, container_adjusted/disputed
+supplier_application_step, application_submitted/decision, document_expiry_action, support_ticket_created/resolved
+Analytics rule: Event properties must use internal IDs and coarse area where sufficient. Do not send OTPs, exact home addresses, CNIC data, free-text support content or payment secrets to analytics.
+ | 
+16. Testing and Quality Assurance
+16.1 Test layers
+Layer
+ | Minimum coverage
+ | Backend unit/domain
+ | Pricing, fees, discounts, commission, deposits, state transitions, serviceability and permissions
+ | Backend feature/API
+ | Auth, supplier isolation, order transaction, idempotency, webhooks, refunds, pagination and validation
+ | Mobile component
+ | Forms, empty-bottle selector, totals, status timeline, error/offline states and role navigation
+ | Mobile integration/E2E
+ | OTP test flow, customer COD order, supplier acceptance, dispatch, delivery OTP and cancellation
+ | Admin
+ | Supplier checklist/decision, permissions, order/support actions, settlement and audit evidence
+ | Security
+ | Broken access control, OTP abuse, file access, injection, rate limit, secrets, session/token revocation
+ | Performance
+ | Nearby shops, catalog scroll, quote/order concurrency, image payload, database spatial query and queue surge
+ | Recovery
+ | Backup restore, failed webhook replay, duplicate callback, queue retry and partial third-party outage
+ | 
+16.2 Must-test business scenarios
+New customer buys 2 jars with zero empties; full deposit charged.
+Customer declares 2 empties but returns 1; final deposit difference and receipt are correct.
+Wrong/damaged brand container; dispute path instead of silent financial adjustment.
+Supplier price changes after cart; quote expires and customer explicitly reconfirms.
+Customer double-taps Place Order during poor network; exactly one order exists.
+Supplier accepts at the same moment the response timer expires; one valid final state and no duplicate refund.
+Online payment succeeds but webhook is delayed/duplicated; one payment capture, one order and correct UI state.
+Supplier document expires with active orders; existing orders remain operable while new order policy is applied.
+Supplier staff attempts payout change or another shop's order; denied and audited.
+Large catalog and long order history remain paginated and smooth on a real mid-range Android device.
+17. DevOps, Environments and Operations
+17.1 Environments
+Environment
+ | Purpose
+ | Data rule
+ | Local
+ | Developer work with mocked/sandbox integrations
+ | Seeded synthetic data only
+ | Development
+ | Shared integration and automated tests
+ | Synthetic test users/suppliers
+ | Staging/UAT
+ | Release candidate, supplier/admin acceptance and payment/maps sandbox
+ | Production-like synthetic data; no copied CNIC/payment data
+ | Production
+ | Live customers and suppliers
+ | Restricted access, monitored, backed up and audited
+ | 
+17.2 CI/CD gates
+Pull request: lint, TypeScript, unit/feature tests, dependency/security checks and build validation.
+Backend deploy: migrations reviewed for backward compatibility; cache/config build; queue workers gracefully restarted.
+Mobile: signed internal build, automated smoke tests, environment-secret validation, version code/build number check and staged rollout.
+Production: approval gate, deployment record, health check, error/latency monitor and documented rollback path.
+Secrets: CI platform secrets and server secret store; maps/payment/FCM credentials separated by environment and restricted.
+17.3 Operational runbooks
+Supplier not responding / mass rejection
+Payment captured but no order
+Duplicate/late payment webhook
+Maps/geocoding outage
+FCM token invalid/deactivated
+Queue backlog
+Expired quality documents
+Suspected contaminated product / recall
+Container dispute spike
+Data breach or exposed credential
+Database restore and mobile forced-update/kill-switch
+18. MVP Roadmap and Estimate
+18.1 Scope by release
+Release
+ | Included scope
+ | Excluded/deferred
+ | MVP / Pilot
+ | One app/dual role, OTP, addresses, nearby shops, supplier approval, catalog, one-shop cart, COD, order states, empty-container/deposit ledger, push, admin operations, basic reports
+ | Online payment, subscriptions, live rider map, advanced promotions, automatic payouts
+ | Phase 2
+ | Easypaisa/JazzCash/Raast/card gateway as selected, recurring deliveries, reviews, supplier staff/rider assignment, promotions, automated settlements, richer support
+ | Fleet marketplace, complex route optimization, corporate credit
+ | Phase 3
+ | Dedicated rider mode/app if needed, live tracking, multi-branch, B2B/corporate, route batching, demand forecasting, multi-city/tax variants
+ | To be prioritized by pilot data
+ | 
+18.2 Recommended MVP team
+1 product owner/founder for daily decisions and supplier discovery.
+1 UI/UX designer for discovery, design system, prototypes and developer handoff (heavy early, part-time later).
+1 React Native developer.
+1 Laravel/backend + admin developer.
+1 QA engineer part-time from first testable flow, full-time near pilot.
+Part-time DevOps/security/payment support as required.
+18.3 Indicative schedule
+Stage
+ | Workstream
+ | Indicative duration
+ | Output
+ | 1
+ | Discovery and supplier interviews
+ | 1–2 weeks
+ | Confirmed business rules, supplier evidence, pilot area, commercial terms
+ | 2
+ | UX/UI and API contract
+ | 2–3 weeks
+ | Flows, wireframes/design system, prototype, OpenAPI/data model
+ | 3
+ | Backend foundation + admin
+ | 4–6 weeks
+ | Auth, suppliers, shops, catalog, geo, settings, approval
+ | 4
+ | Customer + supplier app core
+ | 6–8 weeks
+ | Discovery, cart, orders, supplier inbox/fulfillment, notifications
+ | 5
+ | Container/finance hardening
+ | 2–3 weeks
+ | Deposit ledger, commission, statements, dispute/audit
+ | 6
+ | QA, security, performance and UAT
+ | 3–4 weeks
+ | Regression, device tests, load/security fixes, supplier training
+ | 7
+ | Controlled pilot
+ | 2–4 weeks
+ | One zone, monitored suppliers/customers, issue fixes and KPI review
+ | 
+Overall estimate: With the recommended team and parallel work, a realistic MVP ready for controlled pilot is approximately 14–18 weeks after business rules and designs are approved. A solo developer should expect roughly 22–30 weeks. Online payments and recurring delivery can add 4–8 weeks depending on provider onboarding and final scope.
+ | 
+18.4 Backlog priority (MoSCoW)
+Priority
+ | Items
+ | Must
+ | Supplier verification, nearby serviceable shops, catalog, one-shop cart, COD, order workflow, bottle/deposit ledger, push, admin, audit
+ | Should
+ | Scheduled slots, favorites/reorder, supplier earnings statement, support tickets, document expiry, basic analytics
+ | Could
+ | Online payment, recurring delivery, promotions, reviews, rider sub-account, live ETA, Urdu UI
+ | Won't in MVP
+ | Multi-supplier cart, marketplace-owned fleet, real-time route optimization, corporate credit, AI recommendations
+ | 
+19. Acceptance Criteria
+Capability
+ | Definition of done
+ | Supplier onboarding
+ | A supplier cannot activate until every configured mandatory field/document is approved, an eligible product exists and operations are valid.
+ | Discovery
+ | Given an address, only approved/active shops that serve the location are returned; result states open/closed and why ordering is unavailable.
+ | Price
+ | Cart, checkout, order and receipt totals match the same server pricing components; quote expiry forces explicit reconfirmation.
+ | Order creation
+ | Repeated identical requests with the same idempotency key create exactly one order and one stock/ledger effect.
+ | Supplier isolation
+ | Supplier and staff can access only authorized shop data/actions; unauthorized attempts are denied and recorded.
+ | Fulfillment
+ | Only allowed state transitions succeed; actor, timestamp, reason and notification event are recorded.
+ | Delivery proof
+ | Order cannot complete without configured OTP/proof, actual delivered items and actual container return values.
+ | Containers
+ | Every expected/actual empty and deposit change appears in customer, supplier and admin history with matching order/reference.
+ | Payments
+ | Provider callbacks are verified/idempotent; pending, succeeded, failed and refund states remain distinct and reconcilable.
+ | Compliance
+ | Expiring/expired mandatory documents trigger notifications and configured shop/product restriction without deleting history.
+ | Mobile performance
+ | Home/catalog lists are paginated, image-optimized and pass agreed scroll/startup tests on the pilot Android device set.
+ | Operations
+ | Admin can locate an order by number/phone, view its complete audit timeline and resolve a container/order dispute with a reason.
+ | 
+20. Risks, Launch Plan and Open Decisions
+20.1 Key risks and mitigations
+Risk
+ | Impact
+ | Mitigation
+ | Unverified/unsafe water
+ | Public-health harm and platform trust loss
+ | Strict supplier types/evidence, expiry, spot checks, complaint/recall process, legal agreements
+ | Low supplier density
+ | Customers see few/no shops
+ | Launch one micro-zone, onboard supply before marketing, coverage dashboard
+ | Supplier slow acceptance
+ | Poor customer experience
+ | Response timer, audible alert, pause/capacity controls, ranking penalty and operations coaching
+ | Bottle/deposit disputes
+ | Frequent support and financial leakage
+ | Compatibility rules, delivery confirmation, receipt/photo option, immutable ledger
+ | COD reconciliation
+ | Supplier/platform balance mismatch
+ | Order-level ledger, statements, payout deductions and discrepancy workflow
+ | Payment integration delays
+ | Launch blocked
+ | COD-first MVP; start merchant/provider onboarding early in parallel
+ | Map/API cost
+ | Unexpected operating cost
+ | DB radius pre-filter, cache, field masks, quotas, restricted keys and usage alerts
+ | One app complexity
+ | Wrong-role navigation/data leakage
+ | Separate route trees, permission API, backend policies, role-specific QA
+ | Large payload/slow scroll
+ | React Native network errors and poor retention
+ | Pagination, thumbnails/CDN, compression, field limits and release profiling
+ | Scope creep
+ | Late and unstable launch
+ | Signed MVP backlog, change control and Phase 2 parking lot
+ | 
+20.2 Controlled pilot plan
+Choose one dense service area and map demand/supply before coding the ranking assumptions.
+Interview at least 10 shops and 15–20 households/offices; validate bottle/deposit variants, delivery fee, hours and current order method.
+Recruit 15–30 suppliers, verify documents, upload catalog and run a test order for each before inviting customers.
+Launch to 100–300 invited customers; keep live operations support and daily issue review for the first two weeks.
+Review acceptance, fulfillment, delivery time, repeat rate, container discrepancies, complaints and unit economics weekly.
+Expand radius/areas only after supplier coverage and SLA are stable; do not market uncovered locations.
+20.3 Decisions required before UI design
+ID
+ | Product decision
+ | D1
+ | Exact launch city/areas and whether 5 km is fixed or supplier/admin configurable
+ | D2
+ | Supplier types allowed at pilot: resellers only, refill plants, distributors or all
+ | D3
+ | Mandatory compliance documents and renewal intervals for each supplier type
+ | D4
+ | Product types/sizes, cross-brand empty acceptance and deposit ownership/refund policy
+ | D5
+ | Who delivers, delivery fee model, minimum order, ETA and daily capacity rules
+ | D6
+ | Commission/service fee, tax/invoice treatment and weekly settlement process
+ | D7
+ | COD-only pilot or selected online provider; who is merchant of record and who issues refund
+ | D8
+ | Cancellation windows, rejection timeout, no-response behavior and customer compensation
+ | D9
+ | Languages, customer support hours/SLA and emergency quality complaint process
+ | D10
+ | Final supported Android/iOS versions, hosting region/provider and launch budget
+ | 
+Recommended next action: Run a two-week discovery sprint: interview suppliers/customers, finalize the 10 decisions above, then create wireframes and an OpenAPI contract. Coding should begin only after pricing, container and supplier-verification rules are signed off.
+ | 
+Appendix A. Research Basis and Sources
+Research was used to validate current stack versions, location/push capabilities, market feature patterns, payment options and Pakistan water-supplier compliance signals. Product recommendations remain tailored assumptions for this project.
+[S1] React Native 0.86 release (latest stable at research time) — https://reactnative.dev/blog/2026/06/11/react-native-0.86
+[S2] Laravel 13 release notes and PHP/support requirements — https://laravel.com/docs/13.x/releases
+[S3] Laravel Sanctum – mobile/API and SPA authentication — https://laravel.com/docs/13.x/sanctum
+[S4] Laravel queues and priority processing — https://laravel.com/docs/13.x/queues
+[S5] Firebase Cloud Messaging overview — https://firebase.google.com/docs/cloud-messaging
+[S6] PSQCA list of compulsory items – Bottled Drinking Water PS 4639 — https://www.psqca.com.pk/confirmity-assessment-ca/list-of-compulsory-item-to-meet-pakistan-standards/
+[S7] Sindh Food Authority licensing guide — https://sfa.gos.pk/license.php
+[S8] PCRWR quarterly bottled-water reports (including Jan–Mar 2026) — https://www.pcrwr.gov.pk/bottled-water/
+[S9] PSQCA specification for bottled drinking water — https://www.psqca.com.pk/downloads/PSQCA-Drinking-Water.pdf
+[S10] Google Maps Routes API – Compute Route Matrix — https://developers.google.com/maps/documentation/routes/compute_route_matrix
+[S11] Laravel cursor pagination — https://laravel.com/docs/13.x/pagination
+[S12] React Native performance overview — https://reactnative.dev/docs/performance
+[S13] Bisleri@Doorstep listing – one-time orders and subscriptions — https://play.google.com/store/apps/details?id=com.bisleri.bisleri
+[S14] DrinkPrime listing – recharge, plan changes, issue tracking and maintenance — https://play.google.com/store/apps/details?id=waterwala.com.prime
+[S15] Easypaisa online payment gateway and merchant portal — https://easypaisa.com.pk/online-payment-gateway/
+[S16] State Bank of Pakistan – Raast instant payment system — https://www.sbp.org.pk/raast
+[S17] SBP circular on digital payment acceptance / Raast P2M integration — https://www.sbp.org.pk/circulars/pspod-circular-no-02-of-2025
+Accessed 18 July 2026. Provider pricing, policies, regulations and framework versions can change; re-verify before implementation or launch.
+Appendix B. Glossary
+Term
+ | Meaning
+ | COD
+ | Cash on delivery
+ | FCM
+ | Firebase Cloud Messaging
+ | GMV
+ | Gross merchandise value before deductions
+ | KYC
+ | Know Your Customer / identity verification
+ | MVP
+ | Minimum viable product for controlled pilot
+ | OTP
+ | One-time password/code
+ | P2M
+ | Person-to-merchant payment
+ | PCRWR
+ | Pakistan Council of Research in Water Resources
+ | PSQCA
+ | Pakistan Standards and Quality Control Authority
+ | RBAC
+ | Role-based access control
+ | RPO
+ | Recovery point objective – acceptable potential data-loss window
+ | RTO
+ | Recovery time objective – target restoration time
+ | SFA
+ | Sindh Food Authority
+ | SLA
+ | Service-level agreement/target
+ | Spatial query
+ | A database query using geographic coordinates/geometry
+ | Idempotency
+ | Repeating the same request does not create a duplicate effect
+ | 
+
+End of specification: This document is the baseline for discovery, UI/UX, API design, implementation estimates and pilot acceptance. Update the version whenever a required decision changes the signed MVP scope.
+ | 
