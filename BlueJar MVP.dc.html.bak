@@ -25,8 +25,8 @@
   <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;border-bottom:1px solid #CFD8E3;padding-bottom:24px">
     <div style="display:flex;flex-direction:column;gap:10px;max-width:820px">
       <div style="display:flex;align-items:center;gap:12px">
-        <div style="width:30px;height:30px;border-radius:8px;background:#fff;border:1px solid #E1E8F0;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 100 120" width="16" height="19"><rect x="39" y="2" width="22" height="12" rx="3" fill="#0b3f80"></rect><path d="M38 14H62V24L78 40V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102V40L38 24Z" fill="#0b3f80"></path><path d="M22 74C34 66 44 80 58 74C68 70 74 71 78 73V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102Z" fill="#2f9fe0"></path></svg></div>
-        <div style="font-size:20px;font-weight:800;letter-spacing:-0.3px">Aqua Flow</div>
+        <div style="width:30px;height:30px;border-radius:8px;background:#0F4FA8;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px">B</div>
+        <div style="font-size:20px;font-weight:800;letter-spacing:-0.3px">BlueJar</div>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5B6B7F;border:1px solid #CFD8E3;border-radius:999px;padding:3px 9px">MVP · v1.0</div>
       </div>
       <div style="font-size:38px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;text-wrap:pretty">Water Supplier Marketplace — MVP screen set</div>
@@ -60,8 +60,8 @@
           <div data-screen-label="C0a" style="height:828px;display:flex;flex-direction:column;background:#fff;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
             <div style="padding:26px 22px 20px;background:#0F4FA8;color:#fff">
               <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-                <div style="width:26px;height:26px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 100 120" width="14" height="17"><rect x="39" y="2" width="22" height="12" rx="3" fill="#0b3f80"></rect><path d="M38 14H62V24L78 40V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102V40L38 24Z" fill="#0b3f80"></path><path d="M22 74C34 66 44 80 58 74C68 70 74 71 78 73V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102Z" fill="#2f9fe0"></path></svg></div>
-                <div style="font-weight:800;font-size:17px">Aqua Flow</div>
+                <div style="width:26px;height:26px;border-radius:7px;background:#fff;color:#0F4FA8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">B</div>
+                <div style="font-weight:800;font-size:17px">BlueJar</div>
               </div>
               <div style="font-size:23px;font-weight:800;letter-spacing:-0.5px;line-height:1.2">Log in with your mobile number</div>
               <div style="font-size:13.5px;color:#BBD3F0;margin-top:7px;line-height:1.5">Order sealed drinking water from verified shops near you.</div>
@@ -149,8 +149,8 @@
           <div data-screen-label="C1" style="height:828px;display:flex;flex-direction:column;background:#fff;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
             <div style="padding:22px 20px 18px;background:#0F4FA8;color:#fff">
               <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
-                <div style="width:26px;height:26px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 100 120" width="14" height="17"><rect x="39" y="2" width="22" height="12" rx="3" fill="#0b3f80"></rect><path d="M38 14H62V24L78 40V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102V40L38 24Z" fill="#0b3f80"></path><path d="M22 74C34 66 44 80 58 74C68 70 74 71 78 73V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102Z" fill="#2f9fe0"></path></svg></div>
-                <div style="font-weight:800;font-size:17px">Aqua Flow</div>
+                <div style="width:26px;height:26px;border-radius:7px;background:#fff;color:#0F4FA8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">B</div>
+                <div style="font-weight:800;font-size:17px">BlueJar</div>
               </div>
               <div style="font-size:24px;font-weight:800;letter-spacing:-0.5px;line-height:1.2">Where should we deliver your water?</div>
               <div style="font-size:14px;color:#BBD3F0;margin-top:8px;line-height:1.5">We only show shops that actually serve your street.</div>
@@ -340,7 +340,7 @@
                   <div style="font-size:14px;font-weight:800;color:#14603D">Water quality evidence</div>
                   <div style="font-size:12.5px;font-weight:700;color:#0F4FA8">View docs</div>
                 </div>
-                <div style="font-size:12.5px;color:#2E5A45;line-height:1.55;font-family:'IBM Plex Mono',monospace">Lab test: 12 Jun 2026 · Licence valid till Mar 2027<br />Verified by Aqua Flow ops on 20 Jun 2026</div>
+                <div style="font-size:12.5px;color:#2E5A45;line-height:1.55;font-family:'IBM Plex Mono',monospace">Lab test: 12 Jun 2026 · Licence valid till Mar 2027<br />Verified by BlueJar ops on 20 Jun 2026</div>
               </div>
             </div>
             <div style="display:flex;gap:20px;padding:16px 18px 10px;border-bottom:1px solid #E4E9F0;margin-top:6px">
@@ -410,7 +410,7 @@
                 <div style="font-size:14px;font-weight:800;color:#8A5A0C">How the jar works</div>
                 <div style="display:flex;gap:9px;font-size:13px;color:#6B4A11;line-height:1.5"><span style="font-weight:800">1.</span><span>Give an empty 19L jar at delivery — you pay only <strong>Rs 180</strong>.</span></div>
                 <div style="display:flex;gap:9px;font-size:13px;color:#6B4A11;line-height:1.5"><span style="font-weight:800">2.</span><span>No empty jar? A refundable <strong>Rs 500 deposit</strong> is added per jar.</span></div>
-                <div style="display:flex;gap:9px;font-size:13px;color:#6B4A11;line-height:1.5"><span style="font-weight:800">3.</span><span>Return the jar any time to get the deposit back to your Aqua Flow balance.</span></div>
+                <div style="display:flex;gap:9px;font-size:13px;color:#6B4A11;line-height:1.5"><span style="font-weight:800">3.</span><span>Return the jar any time to get the deposit back to your BlueJar balance.</span></div>
               </div>
 
               <div style="border-top:1px solid #E4E9F0;margin-top:12px;padding-top:14px;display:flex;align-items:center;justify-content:space-between">
@@ -559,7 +559,7 @@
               <div style="font-size:27px;font-weight:800;letter-spacing:-0.5px">Order placed</div>
               <div style="font-size:14.5px;color:#C3DAF4;line-height:1.6">Al-Karam Water Supply has 60 seconds to accept. We will notify you the moment they do.</div>
               <div style="background:rgba(255,255,255,0.13);border-radius:13px;padding:15px 18px;display:flex;flex-direction:column;gap:8px;width:100%">
-                <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:13px"><span style="color:#C3DAF4">Order</span><span style="font-weight:600">AF-24815</span></div>
+                <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:13px"><span style="color:#C3DAF4">Order</span><span style="font-weight:600">BJ-24815</span></div>
                 <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:13px"><span style="color:#C3DAF4">Slot</span><span style="font-weight:600">Today 4–6 PM</span></div>
                 <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:13px"><span style="color:#C3DAF4">Pay on delivery</span><span style="font-weight:600">Rs 1,030</span></div>
               </div>
@@ -588,7 +588,7 @@
           <div data-screen-label="C9" style="height:828px;display:flex;flex-direction:column;background:#F4F6F9;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
             <div style="background:#fff;padding:15px 18px;border-bottom:1px solid #E4E9F0;display:flex;align-items:center;gap:12px;flex:none">
               <div style="font-size:17px;font-weight:700">‹</div>
-              <div style="flex:1"><div style="font-size:16px;font-weight:800">Order AF-24815</div><div style="font-size:12px;color:#5B6B7F;font-family:'IBM Plex Mono',monospace">Al-Karam · 3 × 19L jar</div></div>
+              <div style="flex:1"><div style="font-size:16px;font-weight:800">Order BJ-24815</div><div style="font-size:12px;color:#5B6B7F;font-family:'IBM Plex Mono',monospace">Al-Karam · 3 × 19L jar</div></div>
               <div style="background:#EBF3FD;color:#0F4FA8;border-radius:6px;padding:5px 9px;font-size:11.5px;font-weight:800">On the way</div>
             </div>
             <div style="flex:1;overflow:hidden;padding:16px 18px;display:flex;flex-direction:column;gap:14px">
@@ -665,12 +665,12 @@
               <div style="background:#fff;border:1px solid #E4E9F0;border-radius:13px;overflow:hidden">
                 <div style="padding:13px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #F0F3F7">
                   <div style="width:30px;height:30px;border-radius:8px;background:#FDECEC;color:#B03030;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">+1</div>
-                  <div style="flex:1"><div style="font-size:13.5px;font-weight:700">Jar issued · AF-24815</div><div style="font-size:11.5px;color:#7A8CA1;font-family:'IBM Plex Mono',monospace">28 Jul 2026 · Al-Karam</div></div>
+                  <div style="flex:1"><div style="font-size:13.5px;font-weight:700">Jar issued · BJ-24815</div><div style="font-size:11.5px;color:#7A8CA1;font-family:'IBM Plex Mono',monospace">28 Jul 2026 · Al-Karam</div></div>
                   <div style="font-size:12.5px;font-weight:700;color:#9A6410">+ Rs 500</div>
                 </div>
                 <div style="padding:13px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #F0F3F7">
                   <div style="width:30px;height:30px;border-radius:8px;background:#EAF6EF;color:#1C7A4E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">−2</div>
-                  <div style="flex:1"><div style="font-size:13.5px;font-weight:700">Empties returned · AF-24815</div><div style="font-size:11.5px;color:#7A8CA1;font-family:'IBM Plex Mono',monospace">28 Jul 2026 · Al-Karam</div></div>
+                  <div style="flex:1"><div style="font-size:13.5px;font-weight:700">Empties returned · BJ-24815</div><div style="font-size:11.5px;color:#7A8CA1;font-family:'IBM Plex Mono',monospace">28 Jul 2026 · Al-Karam</div></div>
                   <div style="font-size:12.5px;font-weight:700;color:#5B6B7F">Rs 0</div>
                 </div>
                 <div style="padding:13px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #F0F3F7">
@@ -680,11 +680,11 @@
                 </div>
                 <div style="padding:13px 14px;display:flex;align-items:center;gap:12px">
                   <div style="width:30px;height:30px;border-radius:8px;background:#FDECEC;color:#B03030;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">+1</div>
-                  <div style="flex:1"><div style="font-size:13.5px;font-weight:700">Jar issued · AF-23990</div><div style="font-size:11.5px;color:#7A8CA1;font-family:'IBM Plex Mono',monospace">02 Jul 2026 · Blue Spring</div></div>
+                  <div style="flex:1"><div style="font-size:13.5px;font-weight:700">Jar issued · BJ-23990</div><div style="font-size:11.5px;color:#7A8CA1;font-family:'IBM Plex Mono',monospace">02 Jul 2026 · Blue Spring</div></div>
                   <div style="font-size:12.5px;font-weight:700;color:#9A6410">+ Rs 500</div>
                 </div>
               </div>
-              <div style="font-size:12px;color:#5B6B7F;line-height:1.5;padding:0 2px">Disputes about jar counts are opened from the order screen and settled by Aqua Flow ops.</div>
+              <div style="font-size:12px;color:#5B6B7F;line-height:1.5;padding:0 2px">Disputes about jar counts are opened from the order screen and settled by BlueJar ops.</div>
             </div>
           </div>
         </div>
@@ -718,8 +718,8 @@
           <div data-screen-label="S0" style="height:828px;display:flex;flex-direction:column;background:#fff;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
             <div style="padding:26px 22px 22px;background:#101A28;color:#fff">
               <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-                <div style="width:26px;height:26px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 2px 6px rgba(0,0,0,0.18)"><svg viewBox="0 0 100 120" width="14" height="17"><rect x="39" y="2" width="22" height="12" rx="3" fill="#0b3f80"></rect><path d="M38 14H62V24L78 40V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102V40L38 24Z" fill="#0b3f80"></path><path d="M22 74C34 66 44 80 58 74C68 70 74 71 78 73V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102Z" fill="#2f9fe0"></path></svg></div>
-                <div style="font-weight:800;font-size:17px">Aqua Flow <span style="color:#8FA6C2;font-weight:700">Supplier</span></div>
+                <div style="width:26px;height:26px;border-radius:7px;background:#0F4FA8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">B</div>
+                <div style="font-weight:800;font-size:17px">BlueJar <span style="color:#8FA6C2;font-weight:700">Supplier</span></div>
               </div>
               <div style="font-size:23px;font-weight:800;letter-spacing:-0.5px;line-height:1.2">Log in to run your water shop</div>
               <div style="font-size:13.5px;color:#B7C7DA;margin-top:7px;line-height:1.5">Separate app for shop owners and their delivery staff.</div>
@@ -737,7 +737,7 @@
                 <div style="width:42px;height:42px;border-radius:11px;background:#F1F4F9;color:#8494A7;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:600;flex:none">+</div>
                 <div style="flex:1">
                   <div style="font-size:15px;font-weight:700">Apply to become a supplier</div>
-                  <div style="font-size:12.5px;color:#5B6B7F;line-height:1.5;margin-top:2px">Documents reviewed by Aqua Flow ops in 2–3 working days.</div>
+                  <div style="font-size:12.5px;color:#5B6B7F;line-height:1.5;margin-top:2px">Documents reviewed by BlueJar ops in 2–3 working days.</div>
                 </div>
               </div>
               <div style="background:#F7F9FC;border:1px solid #E4E9F0;border-radius:12px;padding:13px 14px;font-size:12.5px;color:#5B6B7F;line-height:1.55">Delivery staff log in with the same number their owner added under Staff. They only see assigned orders.</div>
@@ -783,7 +783,7 @@
               </div>
               <div style="background:#fff;border:1.5px solid #0F4FA8;border-radius:13px;padding:14px;display:flex;flex-direction:column;gap:11px">
                 <div style="display:flex;justify-content:space-between;align-items:center">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">AF-24815</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">BJ-24815</div>
                   <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#B03030;font-weight:600">accept in 00:48</div>
                 </div>
                 <div style="font-size:14px;font-weight:700">3 × 19L jar · Rs 1,030 COD</div>
@@ -794,7 +794,7 @@
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E4E9F0;border-radius:13px;padding:14px;display:flex;flex-direction:column;gap:9px">
-                <div style="display:flex;justify-content:space-between"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">AF-24814</div><div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#B03030">accept in 00:22</div></div>
+                <div style="display:flex;justify-content:space-between"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">BJ-24814</div><div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#B03030">accept in 00:22</div></div>
                 <div style="font-size:14px;font-weight:700">1 × 12L jar · Rs 170 COD</div>
                 <div style="font-size:12.5px;color:#5B6B7F">Block 5 · 3.4 km · no empties</div>
               </div>
@@ -831,13 +831,13 @@
             </div>
             <div style="flex:1;overflow:hidden;padding:14px 18px;display:flex;flex-direction:column;gap:11px">
               <div style="background:#fff;border:1.5px solid #0F4FA8;border-radius:13px;padding:14px;display:flex;flex-direction:column;gap:10px">
-                <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">AF-24815 · 4:01 PM</div><div style="background:#FDECEC;color:#B03030;border-radius:6px;padding:3px 8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600">00:48</div></div>
+                <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">BJ-24815 · 4:01 PM</div><div style="background:#FDECEC;color:#B03030;border-radius:6px;padding:3px 8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600">00:48</div></div>
                 <div style="font-size:15px;font-weight:700">Sana Ahmed · 3 × 19L jar</div>
                 <div style="display:flex;gap:8px;flex-wrap:wrap"><div style="background:#F1F4F9;border-radius:6px;padding:4px 8px;font-size:11.5px;font-weight:700;color:#3F5064">COD Rs 1,030</div><div style="background:#FFF4E2;border-radius:6px;padding:4px 8px;font-size:11.5px;font-weight:700;color:#9A6410">Collect 2 empties</div><div style="background:#F1F4F9;border-radius:6px;padding:4px 8px;font-size:11.5px;font-weight:700;color:#3F5064">2.1 km</div></div>
                 <div style="display:flex;gap:10px"><button style="flex:1;height:44px;border:0;border-radius:10px;background:#0F4FA8;color:#fff;font-size:14px;font-weight:700;font-family:inherit">Accept</button><button style="width:100px;height:44px;border:1px solid #D8E0EA;border-radius:10px;background:#fff;color:#5B6B7F;font-size:14px;font-weight:700;font-family:inherit">Reject</button></div>
               </div>
               <div style="background:#fff;border:1px solid #E4E9F0;border-radius:13px;padding:14px;display:flex;flex-direction:column;gap:9px">
-                <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">AF-24814 · 3:58 PM</div><div style="background:#FDECEC;color:#B03030;border-radius:6px;padding:3px 8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600">00:22</div></div>
+                <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">BJ-24814 · 3:58 PM</div><div style="background:#FDECEC;color:#B03030;border-radius:6px;padding:3px 8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600">00:22</div></div>
                 <div style="font-size:15px;font-weight:700">Imran Qureshi · 1 × 12L jar</div>
                 <div style="display:flex;gap:8px"><div style="background:#F1F4F9;border-radius:6px;padding:4px 8px;font-size:11.5px;font-weight:700;color:#3F5064">COD Rs 170</div><div style="background:#F1F4F9;border-radius:6px;padding:4px 8px;font-size:11.5px;font-weight:700;color:#3F5064">3.4 km</div></div>
                 <div style="display:flex;gap:10px"><button style="flex:1;height:44px;border:0;border-radius:10px;background:#0F4FA8;color:#fff;font-size:14px;font-weight:700;font-family:inherit">Accept</button><button style="width:100px;height:44px;border:1px solid #D8E0EA;border-radius:10px;background:#fff;color:#5B6B7F;font-size:14px;font-weight:700;font-family:inherit">Reject</button></div>
@@ -863,7 +863,7 @@
           <div data-screen-label="S3" style="height:828px;display:flex;flex-direction:column;background:#F4F6F9;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
             <div style="background:#fff;padding:15px 18px;border-bottom:1px solid #E4E9F0;display:flex;align-items:center;gap:12px;flex:none">
               <div style="font-size:17px;font-weight:700">‹</div>
-              <div style="flex:1"><div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600">AF-24815</div><div style="font-size:12px;color:#5B6B7F">Placed 4:01 PM · slot 4–6 PM</div></div>
+              <div style="flex:1"><div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600">BJ-24815</div><div style="font-size:12px;color:#5B6B7F">Placed 4:01 PM · slot 4–6 PM</div></div>
               <div style="background:#FDECEC;color:#B03030;border-radius:6px;padding:4px 9px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600">00:48</div>
             </div>
             <div style="flex:1;overflow:hidden;padding:14px 18px;display:flex;flex-direction:column;gap:12px">
@@ -885,7 +885,7 @@
                   <div style="display:flex;justify-content:space-between;font-size:13px;color:#6B4A11"><span>Deposit for extra jar</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:600">Rs 500</span></div>
                 </div>
                 <div style="display:flex;justify-content:space-between;font-size:13px;color:#5B6B7F"><span>Delivery fee</span><span style="font-family:'IBM Plex Mono',monospace">Rs 40</span></div>
-                <div style="display:flex;justify-content:space-between;font-size:13px;color:#5B6B7F"><span>Coupon (Aqua Flow funded)</span><span style="font-family:'IBM Plex Mono',monospace;color:#1C7A4E">− Rs 50</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#5B6B7F"><span>Coupon (BlueJar funded)</span><span style="font-family:'IBM Plex Mono',monospace;color:#1C7A4E">− Rs 50</span></div>
                 <div style="height:1px;background:#E4E9F0"></div>
                 <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:15px;font-weight:800">Collect cash</span><span style="font-size:20px;font-weight:800">Rs 1,030</span></div>
                 <div style="font-size:11.5px;color:#7A8CA1;font-family:'IBM Plex Mono',monospace;line-height:1.55">Commission 10% on water only (Rs 54)<br />Deposit Rs 500 is container liability — not commissionable</div>
@@ -914,7 +914,7 @@
           <div data-screen-label="S4" style="height:828px;display:flex;flex-direction:column;background:#F4F6F9;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
             <div style="background:#fff;padding:15px 18px;border-bottom:1px solid #E4E9F0;display:flex;align-items:center;gap:12px;flex:none">
               <div style="font-size:17px;font-weight:700">‹</div>
-              <div style="flex:1"><div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600">AF-24815</div><div style="font-size:12px;color:#5B6B7F">Out for delivery · Asif</div></div>
+              <div style="flex:1"><div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600">BJ-24815</div><div style="font-size:12px;color:#5B6B7F">Out for delivery · Asif</div></div>
             </div>
             <div style="flex:1;overflow:hidden;padding:16px 18px;display:flex;flex-direction:column;gap:14px">
               <div style="display:flex;gap:6px;align-items:center">
@@ -1044,7 +1044,7 @@
               <div style="background:#fff;border:1px solid #E4E9F0;border-radius:13px;padding:15px;display:flex;flex-direction:column;gap:10px;font-family:'IBM Plex Mono',monospace">
                 <div style="display:flex;justify-content:space-between;font-size:13px;color:#5B6B7F"><span>Gross orders</span><span style="color:#101A28">Rs 42,300</span></div>
                 <div style="display:flex;justify-content:space-between;font-size:13px;color:#5B6B7F"><span>Commission 10% of water sales</span><span style="color:#B03030">− Rs 3,780</span></div>
-                <div style="display:flex;justify-content:space-between;font-size:13px;color:#5B6B7F"><span>Deposits held for Aqua Flow</span><span style="color:#B03030">− Rs 1,500</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#5B6B7F"><span>Deposits held for BlueJar</span><span style="color:#B03030">− Rs 1,500</span></div>
                 <div style="display:flex;justify-content:space-between;font-size:13px;color:#5B6B7F"><span>Coupon reimbursement</span><span style="color:#1C7A4E">+ Rs 350</span></div>
                 <div style="height:1px;background:#E4E9F0"></div>
                 <div style="display:flex;justify-content:space-between;align-items:baseline;font-family:'Plus Jakarta Sans',sans-serif"><span style="font-size:15px;font-weight:800">Net payout</span><span style="font-size:20px;font-weight:800">Rs 37,370</span></div>
@@ -1084,19 +1084,19 @@
         <div style="width:1280px;height:800px;border-radius:10px;overflow:hidden;box-shadow:0 22px 70px rgba(16,26,40,0.3);display:flex;flex-direction:column;background:#35363a">
           <div style="height:44px;flex:none;display:flex;align-items:flex-end;gap:10px;padding:0 14px;background:#202124">
             <div style="display:flex;gap:8px;align-items:center;height:44px"><div style="width:12px;height:12px;border-radius:50%;background:#ff5f57"></div><div style="width:12px;height:12px;border-radius:50%;background:#febc2e"></div><div style="width:12px;height:12px;border-radius:50%;background:#28c840"></div></div>
-            <div style="height:34px;min-width:180px;border-radius:8px 8px 0 0;background:#35363a;display:flex;align-items:center;gap:8px;padding:0 12px;font-family:system-ui,sans-serif;font-size:12px;color:#e8eaed"><div style="width:14px;height:14px;border-radius:50%;background:#5f6368"></div>Aqua Flow Ops</div>
+            <div style="height:34px;min-width:180px;border-radius:8px 8px 0 0;background:#35363a;display:flex;align-items:center;gap:8px;padding:0 12px;font-family:system-ui,sans-serif;font-size:12px;color:#e8eaed"><div style="width:14px;height:14px;border-radius:50%;background:#5f6368"></div>BlueJar Ops</div>
           </div>
           <div style="height:40px;flex:none;display:flex;align-items:center;gap:8px;padding:0 12px;background:#35363a">
             <div style="width:16px;height:16px;border-radius:50%;background:#5f6368;opacity:0.5"></div>
             <div style="width:16px;height:16px;border-radius:50%;background:#5f6368;opacity:0.5"></div>
-            <div style="flex:1;height:30px;border-radius:15px;background:#202124;display:flex;align-items:center;gap:9px;padding:0 14px;font-family:system-ui,sans-serif;font-size:13px;color:#e8eaed"><div style="width:12px;height:12px;border-radius:50%;background:#5f6368"></div>admin.aquaflow.pk/login</div>
+            <div style="flex:1;height:30px;border-radius:15px;background:#202124;display:flex;align-items:center;gap:9px;padding:0 14px;font-family:system-ui,sans-serif;font-size:13px;color:#e8eaed"><div style="width:12px;height:12px;border-radius:50%;background:#5f6368"></div>admin.bluejar.pk/login</div>
           </div>
           <div style="flex:1;overflow:hidden">
           <div data-screen-label="A0" style="display:flex;height:716px;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
             <div style="width:520px;background:#101A28;color:#fff;padding:44px 46px;display:flex;flex-direction:column;flex:none">
               <div style="display:flex;align-items:center;gap:11px">
-                <div style="width:30px;height:30px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 2px 6px rgba(0,0,0,0.18)"><svg viewBox="0 0 100 120" width="16" height="19"><rect x="39" y="2" width="22" height="12" rx="3" fill="#0b3f80"></rect><path d="M38 14H62V24L78 40V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102V40L38 24Z" fill="#0b3f80"></path><path d="M22 74C34 66 44 80 58 74C68 70 74 71 78 73V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102Z" fill="#2f9fe0"></path></svg></div>
-                <div style="font-weight:800;font-size:17px">Aqua Flow Ops</div>
+                <div style="width:30px;height:30px;border-radius:8px;background:#0F4FA8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px">B</div>
+                <div style="font-weight:800;font-size:17px">BlueJar Ops</div>
               </div>
               <div style="margin-top:auto;display:flex;flex-direction:column;gap:16px">
                 <div style="font-size:31px;font-weight:800;letter-spacing:-1px;line-height:1.2;max-width:380px">Every approval, refund and jar adjustment is signed by a named operator.</div>
@@ -1112,11 +1112,11 @@
               <div style="width:420px;background:#fff;border:1px solid #E4E9F0;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px">
                 <div>
                   <div style="font-size:22px;font-weight:800;letter-spacing:-0.4px">Sign in</div>
-                  <div style="font-size:13px;color:#5B6B7F;margin-top:5px">Use your Aqua Flow staff account.</div>
+                  <div style="font-size:13px;color:#5B6B7F;margin-top:5px">Use your BlueJar staff account.</div>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:7px">
                   <div style="font-size:12px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#8494A7">Work email</div>
-                  <div style="height:48px;border:1px solid #D8E0EA;border-radius:11px;display:flex;align-items:center;padding:0 14px;font-size:14px;font-family:'IBM Plex Mono',monospace">ayesha@aquaflow.pk</div>
+                  <div style="height:48px;border:1px solid #D8E0EA;border-radius:11px;display:flex;align-items:center;padding:0 14px;font-size:14px;font-family:'IBM Plex Mono',monospace">ayesha@bluejar.pk</div>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:7px">
                   <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:#8494A7">Password</div><div style="font-size:12.5px;font-weight:700;color:#0F4FA8">Forgot?</div></div>
@@ -1134,7 +1134,7 @@
                   </div>
                 </div>
                 <button style="height:50px;border:0;border-radius:11px;background:#0F4FA8;color:#fff;font-size:15px;font-weight:700;font-family:inherit;margin-top:2px">Sign in</button>
-                <div style="background:#FFF8EC;border:1px solid #EBD3A6;border-radius:10px;padding:11px 13px;font-size:12px;color:#6B4A11;line-height:1.5">Suppliers and customers cannot log in here — they use the Aqua Flow mobile app.</div>
+                <div style="background:#FFF8EC;border:1px solid #EBD3A6;border-radius:10px;padding:11px 13px;font-size:12px;color:#6B4A11;line-height:1.5">Suppliers and customers cannot log in here — they use the BlueJar mobile app.</div>
               </div>
             </div>
           </div>
@@ -1148,19 +1148,19 @@
         <div style="width:1280px;height:800px;border-radius:10px;overflow:hidden;box-shadow:0 22px 70px rgba(16,26,40,0.3);display:flex;flex-direction:column;background:#35363a">
           <div style="height:44px;flex:none;display:flex;align-items:flex-end;gap:10px;padding:0 14px;background:#202124">
             <div style="display:flex;gap:8px;align-items:center;height:44px"><div style="width:12px;height:12px;border-radius:50%;background:#ff5f57"></div><div style="width:12px;height:12px;border-radius:50%;background:#febc2e"></div><div style="width:12px;height:12px;border-radius:50%;background:#28c840"></div></div>
-            <div style="height:34px;min-width:180px;border-radius:8px 8px 0 0;background:#35363a;display:flex;align-items:center;gap:8px;padding:0 12px;font-family:system-ui,sans-serif;font-size:12px;color:#e8eaed"><div style="width:14px;height:14px;border-radius:50%;background:#5f6368"></div>Aqua Flow Ops</div>
+            <div style="height:34px;min-width:180px;border-radius:8px 8px 0 0;background:#35363a;display:flex;align-items:center;gap:8px;padding:0 12px;font-family:system-ui,sans-serif;font-size:12px;color:#e8eaed"><div style="width:14px;height:14px;border-radius:50%;background:#5f6368"></div>BlueJar Ops</div>
           </div>
           <div style="height:40px;flex:none;display:flex;align-items:center;gap:8px;padding:0 12px;background:#35363a">
             <div style="width:16px;height:16px;border-radius:50%;background:#5f6368;opacity:0.5"></div>
             <div style="width:16px;height:16px;border-radius:50%;background:#5f6368;opacity:0.5"></div>
-            <div style="flex:1;height:30px;border-radius:15px;background:#202124;display:flex;align-items:center;gap:9px;padding:0 14px;font-family:system-ui,sans-serif;font-size:13px;color:#e8eaed"><div style="width:12px;height:12px;border-radius:50%;background:#5f6368"></div>admin.aquaflow.pk/dashboard</div>
+            <div style="flex:1;height:30px;border-radius:15px;background:#202124;display:flex;align-items:center;gap:9px;padding:0 14px;font-family:system-ui,sans-serif;font-size:13px;color:#e8eaed"><div style="width:12px;height:12px;border-radius:50%;background:#5f6368"></div>admin.bluejar.pk/dashboard</div>
           </div>
           <div style="flex:1;overflow:hidden">
           <div data-screen-label="A1" style="display:flex;height:716px;background:#F4F6F9;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
             <div style="width:216px;background:#101A28;color:#fff;padding:20px 14px;display:flex;flex-direction:column;gap:22px;flex:none">
               <div style="display:flex;align-items:center;gap:10px;padding:0 6px">
-                <div style="width:26px;height:26px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 2px 6px rgba(0,0,0,0.18)"><svg viewBox="0 0 100 120" width="14" height="17"><rect x="39" y="2" width="22" height="12" rx="3" fill="#0b3f80"></rect><path d="M38 14H62V24L78 40V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102V40L38 24Z" fill="#0b3f80"></path><path d="M22 74C34 66 44 80 58 74C68 70 74 71 78 73V102A10 10 0 0 1 68 112H32A10 10 0 0 1 22 102Z" fill="#2f9fe0"></path></svg></div>
-                <div style="font-weight:800;font-size:15px">Aqua Flow Ops</div>
+                <div style="width:26px;height:26px;border-radius:7px;background:#0F4FA8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">B</div>
+                <div style="font-weight:800;font-size:15px">BlueJar Ops</div>
               </div>
               <div style="display:flex;flex-direction:column;gap:3px">
                 <div style="padding:10px 12px;border-radius:9px;background:#0F4FA8;font-size:13.5px;font-weight:700">Dashboard</div>
@@ -1192,19 +1192,19 @@
                     <div>Order</div><div>Supplier</div><div>Issue</div><div>Value</div>
                   </div>
                   <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1fr 0.9fr;padding:13px 16px;border-bottom:1px solid #F3F6F9;font-size:13px;align-items:center">
-                    <div style="font-family:'IBM Plex Mono',monospace">AF-24803</div><div>Hydro Pak Aqua</div><div style="color:#B03030;font-weight:700">No accept · 60s</div><div style="font-family:'IBM Plex Mono',monospace">Rs 720</div>
+                    <div style="font-family:'IBM Plex Mono',monospace">BJ-24803</div><div>Hydro Pak Aqua</div><div style="color:#B03030;font-weight:700">No accept · 60s</div><div style="font-family:'IBM Plex Mono',monospace">Rs 720</div>
                   </div>
                   <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1fr 0.9fr;padding:13px 16px;border-bottom:1px solid #F3F6F9;font-size:13px;align-items:center">
-                    <div style="font-family:'IBM Plex Mono',monospace">AF-24788</div><div>Blue Spring Filtered</div><div style="color:#8A5A0C;font-weight:700">Jar count dispute</div><div style="font-family:'IBM Plex Mono',monospace">Rs 1,030</div>
+                    <div style="font-family:'IBM Plex Mono',monospace">BJ-24788</div><div>Blue Spring Filtered</div><div style="color:#8A5A0C;font-weight:700">Jar count dispute</div><div style="font-family:'IBM Plex Mono',monospace">Rs 1,030</div>
                   </div>
                   <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1fr 0.9fr;padding:13px 16px;border-bottom:1px solid #F3F6F9;font-size:13px;align-items:center">
-                    <div style="font-family:'IBM Plex Mono',monospace">AF-24771</div><div>Al-Karam Water Supply</div><div style="color:#8A5A0C;font-weight:700">OTP not entered</div><div style="font-family:'IBM Plex Mono',monospace">Rs 540</div>
+                    <div style="font-family:'IBM Plex Mono',monospace">BJ-24771</div><div>Al-Karam Water Supply</div><div style="color:#8A5A0C;font-weight:700">OTP not entered</div><div style="font-family:'IBM Plex Mono',monospace">Rs 540</div>
                   </div>
                   <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1fr 0.9fr;padding:13px 16px;border-bottom:1px solid #F3F6F9;font-size:13px;align-items:center">
-                    <div style="font-family:'IBM Plex Mono',monospace">AF-24742</div><div>Aqua Line Water</div><div style="color:#B03030;font-weight:700">Cash mismatch</div><div style="font-family:'IBM Plex Mono',monospace">Rs 1,240</div>
+                    <div style="font-family:'IBM Plex Mono',monospace">BJ-24742</div><div>Aqua Line Water</div><div style="color:#B03030;font-weight:700">Cash mismatch</div><div style="font-family:'IBM Plex Mono',monospace">Rs 1,240</div>
                   </div>
                   <div style="display:grid;grid-template-columns:1.1fr 1.4fr 1fr 0.9fr;padding:13px 16px;font-size:13px;align-items:center">
-                    <div style="font-family:'IBM Plex Mono',monospace">AF-24710</div><div>Chashma Pure</div><div style="color:#8A5A0C;font-weight:700">Refund pending</div><div style="font-family:'IBM Plex Mono',monospace">Rs 380</div>
+                    <div style="font-family:'IBM Plex Mono',monospace">BJ-24710</div><div>Chashma Pure</div><div style="color:#8A5A0C;font-weight:700">Refund pending</div><div style="font-family:'IBM Plex Mono',monospace">Rs 380</div>
                   </div>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:14px">
@@ -1241,12 +1241,12 @@
         <div style="width:1280px;height:800px;border-radius:10px;overflow:hidden;box-shadow:0 22px 70px rgba(16,26,40,0.3);display:flex;flex-direction:column;background:#35363a">
           <div style="height:44px;flex:none;display:flex;align-items:flex-end;gap:10px;padding:0 14px;background:#202124">
             <div style="display:flex;gap:8px;align-items:center;height:44px"><div style="width:12px;height:12px;border-radius:50%;background:#ff5f57"></div><div style="width:12px;height:12px;border-radius:50%;background:#febc2e"></div><div style="width:12px;height:12px;border-radius:50%;background:#28c840"></div></div>
-            <div style="height:34px;min-width:180px;border-radius:8px 8px 0 0;background:#35363a;display:flex;align-items:center;gap:8px;padding:0 12px;font-family:system-ui,sans-serif;font-size:12px;color:#e8eaed"><div style="width:14px;height:14px;border-radius:50%;background:#5f6368"></div>Aqua Flow Ops</div>
+            <div style="height:34px;min-width:180px;border-radius:8px 8px 0 0;background:#35363a;display:flex;align-items:center;gap:8px;padding:0 12px;font-family:system-ui,sans-serif;font-size:12px;color:#e8eaed"><div style="width:14px;height:14px;border-radius:50%;background:#5f6368"></div>BlueJar Ops</div>
           </div>
           <div style="height:40px;flex:none;display:flex;align-items:center;gap:8px;padding:0 12px;background:#35363a">
             <div style="width:16px;height:16px;border-radius:50%;background:#5f6368;opacity:0.5"></div>
             <div style="width:16px;height:16px;border-radius:50%;background:#5f6368;opacity:0.5"></div>
-            <div style="flex:1;height:30px;border-radius:15px;background:#202124;display:flex;align-items:center;gap:9px;padding:0 14px;font-family:system-ui,sans-serif;font-size:13px;color:#e8eaed"><div style="width:12px;height:12px;border-radius:50%;background:#5f6368"></div>admin.aquaflow.pk/applications/SUP-1184</div>
+            <div style="flex:1;height:30px;border-radius:15px;background:#202124;display:flex;align-items:center;gap:9px;padding:0 14px;font-family:system-ui,sans-serif;font-size:13px;color:#e8eaed"><div style="width:12px;height:12px;border-radius:50%;background:#5f6368"></div>admin.bluejar.pk/applications/SUP-1184</div>
           </div>
           <div style="flex:1;overflow:hidden">
           <div data-screen-label="A2" style="display:flex;flex-direction:column;height:716px;background:#F4F6F9;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
@@ -1314,12 +1314,12 @@
         <div style="width:1280px;height:800px;border-radius:10px;overflow:hidden;box-shadow:0 22px 70px rgba(16,26,40,0.3);display:flex;flex-direction:column;background:#35363a">
           <div style="height:44px;flex:none;display:flex;align-items:flex-end;gap:10px;padding:0 14px;background:#202124">
             <div style="display:flex;gap:8px;align-items:center;height:44px"><div style="width:12px;height:12px;border-radius:50%;background:#ff5f57"></div><div style="width:12px;height:12px;border-radius:50%;background:#febc2e"></div><div style="width:12px;height:12px;border-radius:50%;background:#28c840"></div></div>
-            <div style="height:34px;min-width:180px;border-radius:8px 8px 0 0;background:#35363a;display:flex;align-items:center;gap:8px;padding:0 12px;font-family:system-ui,sans-serif;font-size:12px;color:#e8eaed"><div style="width:14px;height:14px;border-radius:50%;background:#5f6368"></div>Aqua Flow Ops</div>
+            <div style="height:34px;min-width:180px;border-radius:8px 8px 0 0;background:#35363a;display:flex;align-items:center;gap:8px;padding:0 12px;font-family:system-ui,sans-serif;font-size:12px;color:#e8eaed"><div style="width:14px;height:14px;border-radius:50%;background:#5f6368"></div>BlueJar Ops</div>
           </div>
           <div style="height:40px;flex:none;display:flex;align-items:center;gap:8px;padding:0 12px;background:#35363a">
             <div style="width:16px;height:16px;border-radius:50%;background:#5f6368;opacity:0.5"></div>
             <div style="width:16px;height:16px;border-radius:50%;background:#5f6368;opacity:0.5"></div>
-            <div style="flex:1;height:30px;border-radius:15px;background:#202124;display:flex;align-items:center;gap:9px;padding:0 14px;font-family:system-ui,sans-serif;font-size:13px;color:#e8eaed"><div style="width:12px;height:12px;border-radius:50%;background:#5f6368"></div>admin.aquaflow.pk/disputes/DSP-318</div>
+            <div style="flex:1;height:30px;border-radius:15px;background:#202124;display:flex;align-items:center;gap:9px;padding:0 14px;font-family:system-ui,sans-serif;font-size:13px;color:#e8eaed"><div style="width:12px;height:12px;border-radius:50%;background:#5f6368"></div>admin.bluejar.pk/disputes/DSP-318</div>
           </div>
           <div style="flex:1;overflow:hidden">
           <div data-screen-label="A3" style="display:flex;height:716px;background:#F4F6F9;font-family:'Plus Jakarta Sans',sans-serif;color:#101A28">
@@ -1338,20 +1338,20 @@
                   <div>Case</div><div>Order</div><div>Supplier</div><div>Claim</div><div>Deposit</div><div>Age</div>
                 </div>
                 <div style="display:grid;grid-template-columns:0.9fr 1fr 1.2fr 1fr 0.8fr 0.8fr;padding:14px 16px;background:#F2F7FE;border-left:3px solid #0F4FA8;font-size:13px;align-items:center">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-weight:600">DSP-318</div><div style="font-family:'IBM Plex Mono',monospace">AF-24788</div><div>Blue Spring Filtered</div><div style="color:#8A5A0C;font-weight:700">Count 2 vs 1</div><div style="font-family:'IBM Plex Mono',monospace">Rs 500</div><div style="font-family:'IBM Plex Mono',monospace">18h</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-weight:600">DSP-318</div><div style="font-family:'IBM Plex Mono',monospace">BJ-24788</div><div>Blue Spring Filtered</div><div style="color:#8A5A0C;font-weight:700">Count 2 vs 1</div><div style="font-family:'IBM Plex Mono',monospace">Rs 500</div><div style="font-family:'IBM Plex Mono',monospace">18h</div>
                 </div>
                 <div style="display:grid;grid-template-columns:0.9fr 1fr 1.2fr 1fr 0.8fr 0.8fr;padding:14px 16px;border-top:1px solid #F3F6F9;font-size:13px;align-items:center">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-weight:600">DSP-317</div><div style="font-family:'IBM Plex Mono',monospace">AF-24702</div><div>Aqua Line Water</div><div style="color:#B03030;font-weight:700">Damaged jar</div><div style="font-family:'IBM Plex Mono',monospace">Rs 500</div><div style="font-family:'IBM Plex Mono',monospace">1d</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-weight:600">DSP-317</div><div style="font-family:'IBM Plex Mono',monospace">BJ-24702</div><div>Aqua Line Water</div><div style="color:#B03030;font-weight:700">Damaged jar</div><div style="font-family:'IBM Plex Mono',monospace">Rs 500</div><div style="font-family:'IBM Plex Mono',monospace">1d</div>
                 </div>
                 <div style="display:grid;grid-template-columns:0.9fr 1fr 1.2fr 1fr 0.8fr 0.8fr;padding:14px 16px;border-top:1px solid #F3F6F9;font-size:13px;align-items:center">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-weight:600">DSP-315</div><div style="font-family:'IBM Plex Mono',monospace">AF-24655</div><div>Al-Karam Water Supply</div><div style="color:#8A5A0C;font-weight:700">Refund not paid</div><div style="font-family:'IBM Plex Mono',monospace">Rs 350</div><div style="font-family:'IBM Plex Mono',monospace">2d</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-weight:600">DSP-315</div><div style="font-family:'IBM Plex Mono',monospace">BJ-24655</div><div>Al-Karam Water Supply</div><div style="color:#8A5A0C;font-weight:700">Refund not paid</div><div style="font-family:'IBM Plex Mono',monospace">Rs 350</div><div style="font-family:'IBM Plex Mono',monospace">2d</div>
                 </div>
                 <div style="display:grid;grid-template-columns:0.9fr 1fr 1.2fr 1fr 0.8fr 0.8fr;padding:14px 16px;border-top:1px solid #F3F6F9;font-size:13px;align-items:center">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-weight:600">DSP-311</div><div style="font-family:'IBM Plex Mono',monospace">AF-24501</div><div>Chashma Pure</div><div style="color:#8A5A0C;font-weight:700">Count 3 vs 2</div><div style="font-family:'IBM Plex Mono',monospace">Rs 500</div><div style="font-family:'IBM Plex Mono',monospace">4d</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-weight:600">DSP-311</div><div style="font-family:'IBM Plex Mono',monospace">BJ-24501</div><div>Chashma Pure</div><div style="color:#8A5A0C;font-weight:700">Count 3 vs 2</div><div style="font-family:'IBM Plex Mono',monospace">Rs 500</div><div style="font-family:'IBM Plex Mono',monospace">4d</div>
                 </div>
               </div>
               <div style="background:#fff;border:1px solid #E4E9F0;border-radius:14px;padding:16px;flex:1;display:flex;flex-direction:column;gap:12px;min-height:0">
-                <div style="font-size:15px;font-weight:800">Container ledger · AF-24788</div>
+                <div style="font-size:15px;font-weight:800">Container ledger · BJ-24788</div>
                 <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5B6B7F">
                   <div style="background:#F7F9FC;border-radius:9px;padding:11px"><div style="color:#8494A7">Issued</div><div style="font-size:16px;color:#101A28;font-weight:600">3</div></div>
                   <div style="background:#F7F9FC;border-radius:9px;padding:11px"><div style="color:#8494A7">Customer says returned</div><div style="font-size:16px;color:#101A28;font-weight:600">2</div></div>
