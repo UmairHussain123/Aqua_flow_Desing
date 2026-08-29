@@ -1,0 +1,16 @@
+{
+  "artboards": [
+    { "file": "Login.dc.html",            "x": 0,    "y": 0,   "w": 390, "h": 844, "title": "SA1 · Login" },
+    { "file": "Main.dc.html",             "x": 480,  "y": 0,   "w": 390, "h": 844, "title": "SB1 · Home" },
+    { "file": "Orders.dc.html",           "x": 960,  "y": 0,   "w": 390, "h": 844, "title": "SB2 · Orders" },
+    { "file": "OrderDetail.dc.html",      "x": 1440, "y": 0,   "w": 390, "h": 844, "title": "SB3 · Order detail" },
+    { "file": "Catalog.dc.html",          "x": 0,    "y": 984, "w": 390, "h": 844, "title": "SB4 · Catalog" },
+    { "file": "Money.dc.html",            "x": 480,  "y": 984, "w": 390, "h": 844, "title": "SB5 · Money" },
+    { "file": "Shop.dc.html",             "x": 960,  "y": 984, "w": 390, "h": 844, "title": "SB6 · Shop" },
+    { "file": "CompleteDelivery.dc.html", "x": 1440, "y": 984, "w": 390, "h": 844, "title": "SB7 · Complete delivery" }
+  ],
+  "annotations": [
+    { "id": "brief", "x": 0, "y": -150, "w": 620, "text": "Aqua Flow Supplier — visual refresh only.\nSame screens, same flows, same fields as the shipped React Native app. What changes: lighter #EEF6FC canvas, 20px cards with soft shadow, fully-rounded pills, teal→blue gradient on primary actions and hero surfaces, drawn water-jar artwork, and a chunkier icon-tile tab bar." }
+  ],
+  "launch": { "view": "canvas" }
+}
